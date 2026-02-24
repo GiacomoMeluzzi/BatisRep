@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lepackage.mappers.UtenteMapper">
+
+	<select id="findUtenteByUsername" resultType="Utente"
+	>select * from utenti where username =
+		#{username}
+	</select>
+	<!--
+	<select id="findAll" resultType="Utente"
+	>select * from utente
+	</select>
+	
+	<select id="findAllJoin" resultType="Utente"
+	>select u.id, u.username, u.nome, u.cognome, u.email, u.telefono, r.nome as ruolo_nome	 
+	from utente u join ruolo r on (r.id = u.ruolo_id)
+	</select>
+
+	<select id="findUtente" resultType="Utente"
+	>select id, email, username,
+		password, ruolo_id from utente where email = #{email} and password = #{password}
+	</select>
+	
+	<select id="findById" resultType="Utente"
+	>select * from utente where id = #{id}
+	</select>
+	
+	<select id="findByNotId" resultType="Utente"
+	>select * from utente where id != #{id}
+	</select>
+
+	<insert id="insert" parameterType="Utente" useGeneratedKeys="true"
+		keyProperty="id"
+		>insert into utente (email, username, password, nome, cognome, telefono, ruolo_id
+		) values (#{email},	#{username}, #{password}, #{nome}, #{cognome}, #{telefono},	#{ruolo_id})
+	</insert>
+	
+	<update id="updateUtente" 
+	>update utente set email = #{email}, username = #{username}, password = #{password},
+        nome = #{nome}, cognome = #{cognome}, telefono = #{telefono}, ruolo_id = #{ruolo_id} 
+        where id = #{id}
+	</update>
+	
+	<update id="updatePsw" 
+		>update utente set password = #{password} where id = #{id}
+	</update>
+	
+	<delete id="deleteUtente"
+	>delete from utente where id = #{id}
+	</delete>
+	-->
+	<!-- mappe 
+	<resultMap id="utenteMap" type="lepackage.model.Utente">
+	    <id property="id" column="id"/>
+	    <result property="username" column="username"/>
+	    <result property="password" column="password"/>
+	    <result property="nome" column="nome"/>
+	    <result property="cognome" column="cognome"/>
+	    <result property="email" column="email"/>
+	    <result property="telefono" column="telefono"/>
+	    <result property="ruolo_id" column="ruolo_id"/>
+	</resultMap>
+	-->
+
+</mapper>
