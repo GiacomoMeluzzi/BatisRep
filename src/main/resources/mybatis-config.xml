@@ -4,7 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 <typeAliases>
-	<typeAlias type="lepackage.models.UtenteEntity" alias="Utente" />
+	<typeAlias type="lepackage.models.UtenteEntity" alias="Utente"/>
+	<typeAlias type="lepackage.models.RuoloEntity" alias="Ruolo"/>
+	<typeAlias type="lepackage.models.MateriaEntity" alias="Materia"/>
+	<typeAlias type="lepackage.models.FacoltaEntity" alias="Facolta"/>
+	<typeAlias type="lepackage.models.VotoEntity" alias="Voto"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Utente_materia_Entity {
+public class Utente_materiaEntity {
 
 	private Integer utente_id;
 	private Integer materia_id;

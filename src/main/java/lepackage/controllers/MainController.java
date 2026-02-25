@@ -1,11 +1,14 @@
 package lepackage.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lepackage.models.UtenteEntity;
+import lepackage.dto.SuperDTO;
+import lepackage.dto.UtenteDTO;
+import lepackage.exceptions.BusinessException;
 import lepackage.services.UtenteService;
 
 @RestController
@@ -13,15 +16,33 @@ import lepackage.services.UtenteService;
 public class MainController {
 
 	private UtenteService utenteService;
-	
+
 	public MainController(UtenteService utenteService) {
 		this.utenteService = utenteService;
 	}
-	
-	@GetMapping("/findByUsername")
-	public UtenteEntity findUtenteByUsername(@RequestParam String username) {
-		System.out.println("I was pinged");
-		return utenteService.findUtenteByUsername(username);
+
+	@PostMapping("/findByUsername")
+	public SuperDTO findUtenteByUsername(@RequestBody UtenteDTO utenteDaCercare) {
+		try {
+			SuperDTO dtoPerFrontend = utenteService.findUtenteByUsername(utenteDaCercare);
+			return dtoPerFrontend;
+		} catch (BusinessException e) {
+			return new SuperDTO("Errore! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		}
 	}
 	
+	@PostMapping("/tryLogin") 
+	public SuperDTO tryLogin(@RequestBody UtenteDTO utenteDaLoggare) {
+		try {
+			SuperDTO dtoPerFrontend = utenteService.findUtenteByEmailEPassword(utenteDaLoggare);
+			return dtoPerFrontend;
+		} catch (BusinessException e) {
+			return new SuperDTO("Errore! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		}
+	}
+
 }

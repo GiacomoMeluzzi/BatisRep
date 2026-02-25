@@ -1,7 +1,6 @@
 package lepackage.models;
 
-import javax.management.relation.Role;
-
+import lepackage.varie.Ruolo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class RuoloEntity {
 	
-	private Role ruolo;
+	private Ruolo nome;
 	
 }
