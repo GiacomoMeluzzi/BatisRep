@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import lepackage.dao.MateriaEFacoltaDao;
 import lepackage.dto.FacoltaDTO;
-import lepackage.dto.SuperDTO;
+import lepackage.dto.ResponseDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.models.FacoltaEntity;
 
@@ -18,10 +18,10 @@ public class MateriaEFacoltaService {
 		this.materiaFacoltaDao = materiaEFacoltaDao;
 	}
 
-	public SuperDTO findFacoltaConMaterieById(FacoltaDTO facoltaDaControllare) throws Exception {
+	public ResponseDTO findFacoltaConMaterieById(String facoltaDaControllareId) throws Exception {
 		try {
 			System.out.println("Chiamato findFacoltaConMaterieById a MateriaEFacoltaService.");
-			FacoltaEntity facoltaTrovata = materiaFacoltaDao.findFacoltaConMaterieById(facoltaDaControllare.getId());
+			FacoltaEntity facoltaTrovata = materiaFacoltaDao.findFacoltaConMaterieById(facoltaDaControllareId);
 			if (facoltaTrovata.getMaterie() == null || facoltaTrovata.getMaterie().size() == 0) {
 				System.out.println("Nessuna materia trovata nella facoltà cercata.");
 				throw new BusinessException(
@@ -29,7 +29,7 @@ public class MateriaEFacoltaService {
 			}
 			FacoltaDTO facoltaPerFrontend = new FacoltaDTO(facoltaTrovata);
 			System.out.println("findFacoltaConMaterieById restituisce oggetto a controller.");
-			SuperDTO oggettoPerFrontEnd = new SuperDTO("Facoltà con materie trovata!", facoltaPerFrontend,
+			ResponseDTO oggettoPerFrontEnd = new ResponseDTO("Facoltà con materie trovata!", facoltaPerFrontend,
 					HttpStatus.OK);
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {

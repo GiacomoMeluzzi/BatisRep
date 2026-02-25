@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SuperDTO implements Serializable {
+public class ResponseDTO implements Serializable {
 
 	private static final long serialVersionUID = 8281710753265902167L;
 	private String message;
