@@ -9,21 +9,23 @@
 	</select>
 	
 	<select id="findUtenteByEmailEPassword" resultType="Utente"
-	>select * from utenti where email = #{email} and password = #{password}
+	>select * 
+		from utenti 
+		where email = #{email} and password = #{password}
 	</select>
 	
 	<select id="findUtenteByEmailEPasswordJoinRuolo" resultMap="utenteConRuoloMap"
 	>select *
-	from utenti u
-	join ruoli r on u.ruolo = r.nome
-	where email = #{email} and password = #{password}
+		from utenti u
+		join ruoli r on u.ruolo = r.nome
+		where email = #{email} and password = #{password}
 	</select>
 	
 	<select id="findUtenteConMaterieDaUsername" resultMap="utenteMaterieMap"
 	>select u.username, m.nome
 		from utenti u
-		join utente_materia t on t.utente_id = u.id
-		join materie m on t.materia_id = m.id
+		left join utente_materia t on t.utente_id = u.id
+		left join materie m on t.materia_id = m.id
 		where u.username = #{username}
 	</select>
 	

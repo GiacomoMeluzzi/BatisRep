@@ -33,8 +33,10 @@ public class UtenteService {
 			SuperDTO oggettoPerFrontEnd = new SuperDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
-			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteByUsername.s");
+			System.out.println("Lancio una BusinessException a UtenteService UtenteService findUtenteByUsername.");
+			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteByUsername.");
 		} catch (Exception e) {
+			System.out.println("Lancio una Exception a UtenteService UtenteService findUtenteByUsername.");
 			throw e;
 		}
 	}
@@ -54,10 +56,13 @@ public class UtenteService {
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
 			if (e.getErrorObject() != null) {
+				System.out.println("L'utente non è stato trovato.");
 				throw e;
 			}
+			System.out.println("Lancio una BusinessException a UtenteService findUtenteByEmailEPasswordJoinRuolo.");
 			throw new BusinessException(e.getMessage(), " a UtenteService findUtenteByEmailEPasswordJoinRuolo.");
 		} catch (Exception e) {
+			System.out.println("Lancio una Exception a UtenteService findUtenteByEmailEPasswordJoinRuolo.");
 			throw e;
 		}
 	}
@@ -66,18 +71,23 @@ public class UtenteService {
 		try {
 			System.out.println("Entra findUtenteConMaterieDaUsername.");
 			if (utenteDaCercare == null) {
-				throw new BusinessException("Utente da cercare è arrivato nullo al service a findUtetneByUsernameJoinRUolo.");
+				throw new BusinessException("Utente da cercare è arrivato nullo al service a findUtetneByUsernameJoinRuolo.");
 			}
 			UtilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
 					utenteDaCercare.getUsername(), null, null, null, null, null, null);
 			UtenteEntity utenteTrovato = utenteDao.findUtenteConMaterieDaUsername(utenteDaCercare.getUsername());
+			if(utenteTrovato.getMaterie() == null || utenteTrovato.getMaterie().size() == 0) {
+				throw new BusinessException(utenteTrovato.getUsername() + " non ha materie!");
+			}
 			UtenteDTO utentePerFrontend = new UtenteDTO(utenteTrovato);
 			SuperDTO oggettoPerFrontEnd = new SuperDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
-			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteConMaterieDaUsername" );
+			System.out.println("Lancio una BusinessException a UtenteService findUtenteConMaterieDaUsername.");
+			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteConMaterieDaUsername." );
 		}
 		catch (Exception e) {
+			System.out.println("Lancio una Exception a UtenteService findUtenteConMaterieDaUsername.");
 			throw e;
 		}
 	}
