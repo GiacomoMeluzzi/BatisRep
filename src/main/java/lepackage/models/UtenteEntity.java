@@ -19,6 +19,7 @@ public class UtenteEntity {
 	private String email;
 	private String password;
 	private RuoloEntity ruolo;
+	private Integer facolta_id;
 	private List<MateriaEntity> materie;
 	
 	@Override

@@ -47,12 +47,14 @@ public class SqlMapFactory {
 			this.sqlSession = ((SqlMapFactory) THREAD_LOCAL.get()).getSqlSessionFactory().openSession();
 
 		}
+		System.out.println("Sessione aperta.");
 		return this.sqlSession;
 	}
 
 	public void commitSession() {
 		if (this.sqlSession != null) {
 			((SqlMapFactory) THREAD_LOCAL.get()).sqlSession.commit();
+			System.out.println("Sessione committata.");
 		}
 	}
 
@@ -60,6 +62,7 @@ public class SqlMapFactory {
 		if ((null != ((SqlMapFactory) THREAD_LOCAL.get()).sqlSession)) {
 			((SqlMapFactory) THREAD_LOCAL.get()).sqlSession.close();
 			((SqlMapFactory) THREAD_LOCAL.get()).sqlSession = null;
+			System.out.println("Sessione chiusa.");
 		}
 	}
 
@@ -70,6 +73,7 @@ public class SqlMapFactory {
 	public void rollbackSession() {
 		if (instance().sqlSession != null) {
 			instance().sqlSession.rollback();
+			System.out.println("Sessione rollbackata.");
 		}
 	}
 

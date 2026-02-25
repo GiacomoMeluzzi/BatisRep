@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lepackage.mappers.MateriaEFacoltaMapper">
+	
+	<select id="findFacoltaConMaterieById" resultMap="facoltaMaterieMap"
+	>select f.id, f.nome as facolta_nome, m.nome as materia_nome
+		from facolta f
+		left join facolta_materia t on t.facolta_id = f.id
+		left join materie m on t.materia_id = m.id
+		where f.id = #{id}
+	</select>
+	
+	<!-- mappe -->
+
+	<resultMap id="facoltaMaterieMap" type="Facolta">
+		<id property="id" column="id"/>
+	    <result property="nome" column="facolta_nome"/>
+	    <collection property="materie" ofType="Materia">
+	        <result property="nome" column="materia_nome"/>
+	    </collection>
+	</resultMap>
+
+</mapper>

@@ -30,7 +30,7 @@ public class UtenteDao implements UtenteMapper {
 		} catch (BusinessException e) {
 			SqlMapFactory.instance().rollbackSession();
 			throw e;
-		} catch (Exception e) {	
+		} catch (Exception e) {
 			SqlMapFactory.instance().rollbackSession();
 			throw new Exception(e.getStackTrace()[0] + "");
 		} finally {
@@ -43,7 +43,8 @@ public class UtenteDao implements UtenteMapper {
 		try {
 			SqlMapFactory.instance().openSession();
 			utenteMapper = (UtenteMapper) SqlMapFactory.instance().getMapper(UtenteMapper.class);
-			System.out.println("Aperta istanza SqlMapFactory, inizio query a findUtenteByEmailEPassword.");
+			System.out
+					.println("Aperta istanza SqlMapFactory, inizio query a 				findUtenteByEmailEPassword.");
 			UtenteEntity utenteTrovato = utenteMapper.findUtenteByEmailEPassword(emailInEntrata, passwordInEntrata);
 			if (null == utenteTrovato) {
 				System.out.println("Utente non trovato");
@@ -55,21 +56,23 @@ public class UtenteDao implements UtenteMapper {
 		} catch (BusinessException e) {
 			SqlMapFactory.instance().rollbackSession();
 			throw e;
-		} catch (Exception e) {	
+		} catch (Exception e) {
 			SqlMapFactory.instance().rollbackSession();
 			throw new Exception(e.getStackTrace()[0] + "");
 		} finally {
 			SqlMapFactory.instance().closeSession();
 		}
 	}
-	
+
 	@Override
-	public UtenteEntity findUtenteByEmailEPasswordJoinRuolo(String emailInEntrata, String passwordInEntrata) throws Exception {
+	public UtenteEntity findUtenteByEmailEPasswordJoinRuolo(String emailInEntrata, String passwordInEntrata)
+			throws Exception {
 		try {
 			SqlMapFactory.instance().openSession();
 			utenteMapper = (UtenteMapper) SqlMapFactory.instance().getMapper(UtenteMapper.class);
 			System.out.println("Aperta istanza SqlMapFactory, inizio query a findUtenteByEmailEPassword.");
-			UtenteEntity utenteTrovato = utenteMapper.findUtenteByEmailEPasswordJoinRuolo(emailInEntrata, passwordInEntrata);
+			UtenteEntity utenteTrovato = utenteMapper.findUtenteByEmailEPasswordJoinRuolo(emailInEntrata,
+					passwordInEntrata);
 			if (null == utenteTrovato) {
 				System.out.println("Utente non trovato");
 				throw new BusinessException("Utente non trovato.", HttpStatus.FORBIDDEN);
@@ -80,7 +83,7 @@ public class UtenteDao implements UtenteMapper {
 		} catch (BusinessException e) {
 			SqlMapFactory.instance().rollbackSession();
 			throw e;
-		} catch (Exception e) {	
+		} catch (Exception e) {
 			SqlMapFactory.instance().rollbackSession();
 			throw new Exception(e.getStackTrace()[0] + "");
 		} finally {
@@ -105,7 +108,7 @@ public class UtenteDao implements UtenteMapper {
 		} catch (BusinessException e) {
 			SqlMapFactory.instance().rollbackSession();
 			throw e;
-		} catch (Exception e) {	
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			SqlMapFactory.instance().rollbackSession();
 			throw new Exception(e.getStackTrace()[0] + "");

@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lepackage.dto.FacoltaDTO;
 import lepackage.dto.SuperDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
+import lepackage.services.MateriaEFacoltaService;
 import lepackage.services.UtenteService;
 
 @RestController
@@ -16,9 +18,11 @@ import lepackage.services.UtenteService;
 public class MainController {
 
 	private UtenteService utenteService;
+	private MateriaEFacoltaService facoltaMateriaService;
 
-	public MainController(UtenteService utenteService) {
+	public MainController(UtenteService utenteService, MateriaEFacoltaService facoltaMateriaService) {
 		this.utenteService = utenteService;
+		this.facoltaMateriaService = facoltaMateriaService;
 	}
 
 	@PostMapping("/findByUsername")
@@ -56,5 +60,30 @@ public class MainController {
 			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	@PostMapping("/getFacolta")
+	public SuperDTO trovaFacoltaConMaterie(@RequestBody FacoltaDTO facoltaDaTrovareConMaterie) {
+		try {
+			SuperDTO dtoPerFrontend = facoltaMateriaService.findFacoltaConMaterieById(facoltaDaTrovareConMaterie);
+			return dtoPerFrontend;
+		} catch (BusinessException e) {
+			return new SuperDTO("Errore! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PostMapping("/registraUtente")
+	public SuperDTO registraNuovoUtente(@RequestBody UtenteDTO utenteDaRegistrare) {
+		try {
+			SuperDTO dtoPerFrontend = null;
+			return dtoPerFrontend;
+		} 
+//		catch (BusinessException e) {
+//			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+//		}	
+		catch (Exception e) {
+			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

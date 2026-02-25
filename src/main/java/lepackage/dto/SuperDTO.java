@@ -19,5 +19,5 @@ public class SuperDTO implements Serializable {
 	private String message;
 	private Object dtoForFrontEnd;
 	private HttpStatus statusCode;
-	
+
 }

@@ -23,6 +23,7 @@ public class UtenteDTO {
 	private String password;
 	private Ruolo ruolo;
 	private List<String> materie;
+	private Integer facolta_id;
 	
 	public UtenteDTO (UtenteEntity utenteDaConvertireSenzaPassword) {
 		
@@ -30,6 +31,7 @@ public class UtenteDTO {
 		this.username = utenteDaConvertireSenzaPassword.getUsername();
 		this.email = utenteDaConvertireSenzaPassword.getEmail();
 		this.password = null;
+		this.facolta_id = utenteDaConvertireSenzaPassword.getFacolta_id();
 		if (null != utenteDaConvertireSenzaPassword.getRuolo()) {
 		this.ruolo = utenteDaConvertireSenzaPassword.getRuolo().getNome();
 		}
