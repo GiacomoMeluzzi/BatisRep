@@ -88,4 +88,30 @@ public class UtenteDao implements UtenteMapper {
 		}
 	}
 
+	@Override
+	public UtenteEntity findUtenteConMaterieDaUsername(String usernameInEntrata) throws Exception {
+		try {
+			SqlMapFactory.instance().openSession();
+			utenteMapper = (UtenteMapper) SqlMapFactory.instance().getMapper(UtenteMapper.class);
+			System.out.println("Aperta istanza SqlMapFactory, inizio query a findUtenteConMaterieDaUsername.");
+			UtenteEntity utenteTrovato = utenteMapper.findUtenteConMaterieDaUsername(usernameInEntrata);
+			if (null == utenteTrovato) {
+				System.out.println("Utente non trovato");
+				throw new BusinessException("Utente non trovato.", HttpStatus.FORBIDDEN);
+			}
+			SqlMapFactory.instance().commitSession();
+			System.out.println("Utente trovato nel DB.");
+			return utenteTrovato;
+		} catch (BusinessException e) {
+			SqlMapFactory.instance().rollbackSession();
+			throw e;
+		} catch (Exception e) {	
+			System.out.println(e.getMessage());
+			SqlMapFactory.instance().rollbackSession();
+			throw new Exception(e.getStackTrace()[0] + "");
+		} finally {
+			SqlMapFactory.instance().closeSession();
+		}
+	}
+
 }

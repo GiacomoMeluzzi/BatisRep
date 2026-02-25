@@ -10,4 +10,5 @@ public interface UtenteMapper {
 	
 	public UtenteEntity findUtenteByEmailEPasswordJoinRuolo(String email, String password) throws Exception;
 	
+	public UtenteEntity findUtenteConMaterieDaUsername(String username) throws Exception;
 }

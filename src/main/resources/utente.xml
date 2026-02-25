@@ -12,59 +12,23 @@
 	>select * from utenti where email = #{email} and password = #{password}
 	</select>
 	
-	<select id="findUtenteByEmailEPasswordJoinRuolo" resultMap="UtenteMap"
+	<select id="findUtenteByEmailEPasswordJoinRuolo" resultMap="utenteConRuoloMap"
 	>select *
 	from utenti u
 	join ruoli r on u.ruolo = r.nome
 	where email = #{email} and password = #{password}
 	</select>
 	
-	<!--
-	<select id="findAll" resultType="Utente"
-	>select * from utente
+	<select id="findUtenteConMaterieDaUsername" resultMap="utenteMaterieMap"
+	>select u.username, m.nome
+		from utenti u
+		join utente_materia t on t.utente_id = u.id
+		join materie m on t.materia_id = m.id
+		where u.username = #{username}
 	</select>
-	
-	<select id="findAllJoin" resultType="Utente"
-	>select u.id, u.username, u.nome, u.cognome, u.email, u.telefono, r.nome as ruolo_nome	 
-	from utente u join ruolo r on (r.id = u.ruolo_id)
-	</select>
-
-	<select id="findUtente" resultType="Utente"
-	>select id, email, username,
-		password, ruolo_id from utente where email = #{email} and password = #{password}
-	</select>
-	
-	<select id="findById" resultType="Utente"
-	>select * from utente where id = #{id}
-	</select>
-	
-	<select id="findByNotId" resultType="Utente"
-	>select * from utente where id != #{id}
-	</select>
-
-	<insert id="insert" parameterType="Utente" useGeneratedKeys="true"
-		keyProperty="id"
-		>insert into utente (email, username, password, nome, cognome, telefono, ruolo_id
-		) values (#{email},	#{username}, #{password}, #{nome}, #{cognome}, #{telefono},	#{ruolo_id})
-	</insert>
-	
-	<update id="updateUtente" 
-	>update utente set email = #{email}, username = #{username}, password = #{password},
-        nome = #{nome}, cognome = #{cognome}, telefono = #{telefono}, ruolo_id = #{ruolo_id} 
-        where id = #{id}
-	</update>
-	
-	<update id="updatePsw" 
-		>update utente set password = #{password} where id = #{id}
-	</update>
-	
-	<delete id="deleteUtente"
-	>delete from utente where id = #{id}
-	</delete>
-	-->
 	
 	<!-- mappe -->
-	<resultMap id="UtenteMap" type="Utente">
+	<resultMap id="utenteConRuoloMap" type="Utente">
 	    <id property="id" column="id"/>
 	    <result property="username" column="username"/>
 	    <result property="password" column="password"/>
@@ -72,7 +36,13 @@
 	    <association property="ruolo" javaType="Ruolo">
 	    	<result property="nome" column="ruolo"/>
 	    </association>
-	    
+	</resultMap>
+	
+	<resultMap id="utenteMaterieMap" type="Utente">
+	    <result property="username" column="username"/>
+	    <collection property="materie" ofType="Materia">
+	        <result property="nome" column="nome"/>
+	    </collection>
 	</resultMap>
 
 </mapper>

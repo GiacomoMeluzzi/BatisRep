@@ -1,5 +1,6 @@
 package lepackage.models;
 
+import java.util.List;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class UtenteEntity {
 	private String email;
 	private String password;
 	private RuoloEntity ruolo;
+	private List<MateriaEntity> materie;
 	
 	@Override
 	public int hashCode() {

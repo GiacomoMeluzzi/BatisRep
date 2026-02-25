@@ -1,5 +1,9 @@
 package lepackage.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import lepackage.models.MateriaEntity;
 import lepackage.models.UtenteEntity;
 import lepackage.varie.Ruolo;
 import lombok.AllArgsConstructor;
@@ -18,6 +22,7 @@ public class UtenteDTO {
 	private String email;
 	private String password;
 	private Ruolo ruolo;
+	private List<String> materie;
 	
 	public UtenteDTO (UtenteEntity utenteDaConvertireSenzaPassword) {
 		
@@ -27,6 +32,14 @@ public class UtenteDTO {
 		this.password = null;
 		if (null != utenteDaConvertireSenzaPassword.getRuolo()) {
 		this.ruolo = utenteDaConvertireSenzaPassword.getRuolo().getNome();
+		}
+		if(utenteDaConvertireSenzaPassword.getMaterie() != null &&
+				utenteDaConvertireSenzaPassword.getMaterie().size() != 0) {
+			List<String> nomiMaterie = new ArrayList<String>();
+			for (MateriaEntity materieDaConvertire : utenteDaConvertireSenzaPassword.getMaterie()) {
+				nomiMaterie.add(materieDaConvertire.getNome());
+			}
+			this.materie = nomiMaterie;
 		}
 		System.out.println("Convertita entità in DTO.");
 	}

@@ -44,5 +44,17 @@ public class MainController {
 			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@PostMapping("/getMaterieUtente")
+	public SuperDTO trovaMaterieUtente(@RequestBody UtenteDTO utenteDaTrovareConMaterie) {
+		try {
+			SuperDTO dtoPerFrontend = utenteService.findUtenteConMaterieDaUsername(utenteDaTrovareConMaterie);
+			return dtoPerFrontend;
+		} catch (BusinessException e) {
+			return new SuperDTO("Errore! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		}
+	}
 
 }

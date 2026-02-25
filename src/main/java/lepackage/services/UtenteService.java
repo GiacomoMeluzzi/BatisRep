@@ -61,5 +61,25 @@ public class UtenteService {
 			throw e;
 		}
 	}
+	
+	public SuperDTO findUtenteConMaterieDaUsername (UtenteDTO utenteDaCercare) throws Exception {
+		try {
+			System.out.println("Entra findUtenteConMaterieDaUsername.");
+			if (utenteDaCercare == null) {
+				throw new BusinessException("Utente da cercare è arrivato nullo al service a findUtetneByUsernameJoinRUolo.");
+			}
+			UtilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
+					utenteDaCercare.getUsername(), null, null, null, null, null, null);
+			UtenteEntity utenteTrovato = utenteDao.findUtenteConMaterieDaUsername(utenteDaCercare.getUsername());
+			UtenteDTO utentePerFrontend = new UtenteDTO(utenteTrovato);
+			SuperDTO oggettoPerFrontEnd = new SuperDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
+			return oggettoPerFrontEnd;
+		} catch (BusinessException e) {
+			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteConMaterieDaUsername" );
+		}
+		catch (Exception e) {
+			throw e;
+		}
+	}
 
 }
