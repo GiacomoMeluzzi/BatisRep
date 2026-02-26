@@ -1,14 +1,17 @@
 package lepackage.mappers;
 
+import lepackage.dto.UtenteDTO;
 import lepackage.models.UtenteEntity;
 
 public interface UtenteMapper {
 
-	public UtenteEntity findUtenteByUsername(String username) throws Exception;
+	UtenteEntity findUtenteByUsername(String username) throws Exception;
 	
-	public UtenteEntity findUtenteByEmailEPassword(String email, String password) throws Exception;
+	UtenteEntity findUtenteByEmailEPassword(String email, String password) throws Exception;
 	
-	public UtenteEntity findUtenteByEmailEPasswordJoinRuolo(String email, String password) throws Exception;
+	UtenteEntity findUtenteByEmailEPasswordJoinRuolo(String email, String password) throws Exception;
 	
-	public UtenteEntity findUtenteConMaterieDaUsername(String username) throws Exception;
+	UtenteEntity findUtenteConMaterieDaUsername(String username) throws Exception;
+	
+	Integer inserisciNuovoUtente(UtenteDTO nuovoUtente) throws Exception;
 }

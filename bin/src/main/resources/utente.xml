@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lepackage.mappers.UtenteMapper">
+
+	<select id="findUtenteByUsername" resultType="Utente"
+	>select * from utenti where username =
+		#{username}
+	</select>
+	
+	<select id="findUtenteByEmailEPassword" resultType="Utente"
+	>select * 
+		from utenti 
+		where email = #{email} and password = #{password}
+	</select>
+	
+	<select id="findUtenteByEmailEPasswordJoinRuolo" resultMap="utenteConRuoloMap"
+	>select *
+		from utenti u
+		join ruoli r on u.ruolo = r.nome
+		where email = #{email} and password = #{password}
+	</select>
+	
+	<select id="findUtenteConMaterieDaUsername" resultMap="utenteMaterieMap"
+	>select u.username, m.nome
+		from utenti u
+		left join utente_materia t on t.utente_id = u.id
+		left join materie m on t.materia_id = m.id
+		where u.username = #{username}
+	</select>
+	
+	<!-- mappe -->
+	<resultMap id="utenteConRuoloMap" type="Utente">
+	    <id property="id" column="id"/>
+	    <result property="username" column="username"/>
+	    <result property="password" column="password"/>
+	    <result property="email" column="email"/>
+	    <association property="ruolo" javaType="Ruolo">
+	    	<result property="nome" column="ruolo"/>
+	    </association>
+	</resultMap>
+	
+	<resultMap id="utenteMaterieMap" type="Utente">
+	    <result property="username" column="username"/>
+	    <collection property="materie" ofType="Materia">
+	        <result property="nome" column="nome"/>
+	    </collection>
+	</resultMap>
+
+</mapper>

@@ -2,12 +2,15 @@ package lepackage.utilities;
 
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
+
 import lepackage.exceptions.BusinessException;
 import lepackage.varie.Ruolo;
 
-public class UtilityClass {
+@Component
+public class UtilityClass<T> {
 
-	public static boolean regexCheckUnoFinoAQuattroCampi(int numberOfRegexArguments, String firstRegexArgs,
+	public boolean regexCheckUnoFinoAQuattroCampi(int numberOfRegexArguments, String firstRegexArgs,
 			String firstInputArgs, String secondRegexArgs, String secondInputArgs, String thirdRegexArgs,
 			String thirdInputArgs, String fourthRegexArgs, String fourthInputArgs) throws BusinessException {
 		System.out.println("Chiamata utiliy class per controllo regex.");
@@ -71,7 +74,7 @@ public class UtilityClass {
 		}
 	}
 
-	public static boolean roleCheck(Ruolo ruoloDaControllare, Ruolo ruoloACuiParagonare) throws BusinessException {
+	public boolean roleCheck(Ruolo ruoloDaControllare, Ruolo ruoloACuiParagonare) throws BusinessException {
 		System.out.println("Chiamata utilityClass per roleCheck.");
 		if (ruoloDaControllare == null) {
 			System.out.println("Role check, errore, ruolo nullo!");
@@ -85,6 +88,28 @@ public class UtilityClass {
 			System.out.println("Role check, errore!");
 			throw new BusinessException("Ruolo invalido a roleCheck!");
 		}
+	}
+
+	public void verificaOggettoNonNull(T oggettoDaControllare) throws BusinessException
+	{
+		System.out.println("Verifica oggetto non null o vuoto.");
+		if (oggettoDaControllare == null) {
+			System.out.println("Oggetto nullo a verificaOggettoNonNull.");
+			throw new BusinessException("Oggetto è null.");
+		}
+		if (oggettoDaControllare instanceof String && oggettoDaControllare.equals("")){
+			System.out.println("Stringa vuota a verificaOggettoNonNull.");
+			throw new BusinessException("Stringa vuota.");
+		}
+		if (oggettoDaControllare instanceof Object[] array && array.length == 0) {
+			System.out.println("Array vuoto a verificaOggettoNonNull.");
+			throw new BusinessException("Array vuoto.");
+		}
+		if (oggettoDaControllare instanceof java.util.List<?> list && list.isEmpty()) {
+			System.out.println("Lista vuota a verificaOggettoNonNull.");
+			throw new BusinessException("Lista vuota.");
+		}
+		System.out.println("Verifica non nullità completata.");
 	}
 
 }

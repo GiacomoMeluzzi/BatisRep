@@ -29,6 +29,12 @@
 		where u.username = #{username}
 	</select>
 	
+	<insert id="inserisciNuovoUtente" parameterType="UtenteDTO"
+		useGeneratedKeys="true" keyProperty="id"
+		>insert into utenti (username, email, password, ruolo)
+		values (#{username}, #{email}, #{password}, #{ruolo})
+	</insert>
+	
 	<!-- mappe -->
 	<resultMap id="utenteConRuoloMap" type="Utente">
 	    <id property="id" column="id"/>

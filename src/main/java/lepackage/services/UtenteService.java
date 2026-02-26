@@ -7,6 +7,7 @@ import lepackage.dto.ResponseDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.models.UtenteEntity;
+import lepackage.utilities.ConvertitoreClass;
 import lepackage.utilities.UtilityClass;
 import static lepackage.utilities.Constants.*;
 
@@ -15,22 +16,23 @@ public class UtenteService {
 
 	private UtenteDao utenteDao;
 	private MateriaEFacoltaService materiaEfacoltaService;
+	private UtilityClass<UtenteDTO> utilityClass;
 
-	public UtenteService(UtenteDao utenteDao, MateriaEFacoltaService materiaEfacoltaService) {
+	public UtenteService(UtenteDao utenteDao, MateriaEFacoltaService materiaEfacoltaService,
+			UtilityClass<UtenteDTO> utilityClass) {
 		this.utenteDao = utenteDao;
 		this.materiaEfacoltaService = materiaEfacoltaService;
+		this.utilityClass = utilityClass;
 	}
 
 	public ResponseDTO findUtenteByUsername(UtenteDTO utenteDaCercare) throws Exception {
 		try {
+			utilityClass.verificaOggettoNonNull(utenteDaCercare);
 			System.out.println("Entra findUtenteyUsername.");
-			if (utenteDaCercare == null) {
-				throw new BusinessException("Utente da cercare è arrivato nullo al service a findUtetneByUsername.");
-			}
-			UtilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
+			utilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
 					utenteDaCercare.getUsername(), null, null, null, null, null, null);
 			UtenteEntity utenteTrovato = utenteDao.findUtenteByUsername(utenteDaCercare.getUsername());
-			UtenteDTO utentePerFrontend = new UtenteDTO(utenteTrovato);
+			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteDTOtoEntityNoPassword(utenteTrovato);
 			ResponseDTO oggettoPerFrontEnd = new ResponseDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
@@ -44,15 +46,13 @@ public class UtenteService {
 
 	public ResponseDTO findUtenteByEmailEPassword(UtenteDTO utenteDaCercare) throws Exception {
 		try {
+			utilityClass.verificaOggettoNonNull(utenteDaCercare);
 			System.out.println("Entra findUtenteByEmailEPassword.");
-			if (utenteDaCercare == null) {
-				throw new BusinessException("Utente da cercare è arrivato nullo al service a findUtetneByUsernameJoinRUolo.");
-			}
-			UtilityClass.regexCheckUnoFinoAQuattroCampi(TWO_REGEX_ARGUMENTS, LOGIN_REGEX_MAIL,
+			utilityClass.regexCheckUnoFinoAQuattroCampi(TWO_REGEX_ARGUMENTS, LOGIN_REGEX_MAIL,
 					utenteDaCercare.getEmail(), LOGIN_REGEX_PSW, utenteDaCercare.getPassword(), null, null, null, null);
 			UtenteEntity utenteTrovato = utenteDao.findUtenteByEmailEPasswordJoinRuolo(utenteDaCercare.getEmail(),
 					utenteDaCercare.getPassword());
-			UtenteDTO utentePerFrontend = new UtenteDTO(utenteTrovato);
+			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteDTOtoEntityNoPassword(utenteTrovato);
 			ResponseDTO oggettoPerFrontEnd = new ResponseDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
@@ -70,17 +70,15 @@ public class UtenteService {
 	
 	public ResponseDTO findUtenteConMaterieDaUsername (UtenteDTO utenteDaCercare) throws Exception {
 		try {
+			utilityClass.verificaOggettoNonNull(utenteDaCercare);
 			System.out.println("Entra findUtenteConMaterieDaUsername.");
-			if (utenteDaCercare == null) {
-				throw new BusinessException("Utente da cercare è arrivato nullo al service a findUtetneByUsernameJoinRuolo.");
-			}
-			UtilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
+			utilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
 					utenteDaCercare.getUsername(), null, null, null, null, null, null);
 			UtenteEntity utenteTrovato = utenteDao.findUtenteConMaterieDaUsername(utenteDaCercare.getUsername());
 			if(utenteTrovato.getMaterie() == null || utenteTrovato.getMaterie().size() == 0) {
 				throw new BusinessException(utenteTrovato.getUsername() + " non ha materie!");
 			}
-			UtenteDTO utentePerFrontend = new UtenteDTO(utenteTrovato);
+			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteDTOtoEntityNoPassword(utenteTrovato);
 			ResponseDTO oggettoPerFrontEnd = new ResponseDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {

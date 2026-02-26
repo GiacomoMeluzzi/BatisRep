@@ -1,6 +1,8 @@
 package lepackage.dto;
 
 import java.io.Serializable;
+
+import lepackage.exceptions.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +12,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MateriaDTO implements Serializable {
+public class MateriaDTO extends SuperDTO implements Serializable {
 
 	private static final long serialVersionUID = 3051203338431526641L;
 	private Integer id;
 	private String nome;
+	
+	@Override
+	public void verificaNonNullitaCampi() throws BusinessException {
+	}
 	
 }

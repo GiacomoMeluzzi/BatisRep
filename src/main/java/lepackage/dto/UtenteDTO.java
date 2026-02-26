@@ -3,6 +3,7 @@ package lepackage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import lepackage.exceptions.BusinessException;
 import lepackage.models.MateriaEntity;
 import lepackage.models.UtenteEntity;
 import lepackage.varie.Ruolo;
@@ -15,35 +16,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UtenteDTO {
+public class UtenteDTO extends SuperDTO {
 
-	private Integer id;	
+	private Integer id;
 	private String username;
 	private String email;
 	private String password;
 	private Ruolo ruolo;
 	private List<String> materie;
-	private Integer facolta_id;
-	
-	public UtenteDTO (UtenteEntity utenteDaConvertireSenzaPassword) {
-		
-		this.id = utenteDaConvertireSenzaPassword.getId();
-		this.username = utenteDaConvertireSenzaPassword.getUsername();
-		this.email = utenteDaConvertireSenzaPassword.getEmail();
-		this.password = null;
-		this.facolta_id = utenteDaConvertireSenzaPassword.getFacolta_id();
-		if (null != utenteDaConvertireSenzaPassword.getRuolo()) {
-		this.ruolo = utenteDaConvertireSenzaPassword.getRuolo().getNome();
+	private Integer facoltaId;
+
+	@Override
+	public void verificaNonNullitaCampi() throws BusinessException {
+		if (materie == null || materie.size() == 0) {
+			throw new BusinessException("Campo materie vuoto a verificaNonNullitaCampi a UtenteDTO.");
 		}
-		if(utenteDaConvertireSenzaPassword.getMaterie() != null &&
-				utenteDaConvertireSenzaPassword.getMaterie().size() != 0) {
-			List<String> nomiMaterie = new ArrayList<String>();
-			for (MateriaEntity materieDaConvertire : utenteDaConvertireSenzaPassword.getMaterie()) {
-				nomiMaterie.add(materieDaConvertire.getNome());
-			}
-			this.materie = nomiMaterie;
-		}
-		System.out.println("Convertita entità in DTO.");
+
 	}
-	
+
 }

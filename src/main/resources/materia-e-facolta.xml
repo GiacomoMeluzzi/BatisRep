@@ -11,6 +11,22 @@
 		where f.id = #{id}
 	</select>
 	
+	<insert id="insertMateriaEUtente" parameterType="UtenteMateria"
+	>insert into utente_materia utente_id, materia_id 
+	values 
+		<foreach collection="materiaId" item="id" separator=",">
+			(#{utente_id}, #{id})
+		</foreach>
+	</insert>
+	
+	<insert id="insertFacoltaEUtente" parameterType="FacoltaUtente"
+	>insert into facolta_utente facolta_id, utente_id 
+	values 
+		<foreach collection="utenteId" item="id" separator=",">
+			(#{facolta_id}, #{id})
+		</foreach>
+	</insert>
+	
 	<!-- mappe -->
 
 	<resultMap id="facoltaMaterieMap" type="Facolta">

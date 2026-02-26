@@ -5,8 +5,10 @@ import static lepackage.utilities.Constants.*;
 import lepackage.dao.MateriaEFacoltaDao;
 import lepackage.dao.UtenteDao;
 import lepackage.dto.ResponseDTO;
+import lepackage.dto.SuperDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
+import lepackage.models.FacoltaEntity;
 import lepackage.utilities.UtilityClass;
 
 public class CommonService {
@@ -15,24 +17,22 @@ public class CommonService {
 	private MateriaEFacoltaDao materiaFacoltaDao;
 	private UtenteService utenteService;
 	private MateriaEFacoltaService materiaEFacoltaService;
+	private UtilityClass<SuperDTO> utilityClass;
 	
 	public CommonService(UtenteDao utenteDao, MateriaEFacoltaDao materiaEFacoltaDao,
-			UtenteService utenteService, MateriaEFacoltaService materiaEFacoltaService) {
+			UtenteService utenteService, MateriaEFacoltaService materiaEFacoltaService,
+			UtilityClass<SuperDTO> utilityClass) {
 		this.utenteDao = utenteDao;
 		this.materiaFacoltaDao = materiaEFacoltaDao;
 		this.utenteService = utenteService;
 		this.materiaEFacoltaService = materiaEFacoltaService;
+		this.utilityClass = utilityClass;
 	}
 	
 	public ResponseDTO tryRegistrazioneUtente (UtenteDTO utenteDaRegistrare) throws Exception {
 		try {
-			System.out.println("Entra tryRegistrazioneUtente");
-			if(utenteDaRegistrare == null) {
-				System.out.println("Lancio eccezione causa controllo utenteDTO nullo.");
-				throw new BusinessException("UtenteDTO in arrivo tryRegistrazioneUtente nullo.");
-			}
-			System.out.println("Inizio controllo regex utenteDTO");
-			UtilityClass.regexCheckUnoFinoAQuattroCampi(THREE_REGEX_ARGUMENTS,
+			System.out.println("Entra tryRegistrazioneUtente. Inizio controllo regex utenteDTO");
+			utilityClass.regexCheckUnoFinoAQuattroCampi(THREE_REGEX_ARGUMENTS,
 					LOGIN_REGEX_MAIL, utenteDaRegistrare.getEmail(), 
 					LOGIN_REGEX_USR, utenteDaRegistrare.getUsername(),
 					LOGIN_REGEX_PSW,utenteDaRegistrare.getPassword(), 
@@ -43,7 +43,7 @@ public class CommonService {
 				throw new BusinessException("Il ruolo è nullo.");
 			}
 			System.out.println("Ruolo accettato, controllo facoltà.");
-			if (utenteDaRegistrare.getFacolta_id() == null) {
+			if (utenteDaRegistrare.getFacoltaId() == null) {
 				System.out.println("Lancio eccezione causa facolta_id utenteDTO nullo.");
 				throw new BusinessException("facolta_id è nullo");
 			}
@@ -53,7 +53,12 @@ public class CommonService {
 				throw new BusinessException("materie utenteDTO nullo o vuoto");
 			}
 			System.out.println("Tutti i controlli DTO superati, passo a chiamate DB.");
-			materiaEFacoltaService.findFacoltaConMaterieById(utenteDaRegistrare.getFacolta_id());
+			FacoltaEntity facoltaTrovata = materiaFacoltaDao.findFacoltaConMaterieById(utenteDaRegistrare.getFacoltaId());
+			if (facoltaTrovata.getMaterie() == null || facoltaTrovata.getMaterie().size() == 0) {
+				System.out.println("Nessuna materia trovata nella facoltà cercata.");
+				throw new BusinessException(
+						"Nessuna materia trovata nella facoltà cercata a MateriaEFacoltaService findFacoltaConMaterieById.");
+			}
 			return null;
 		} catch (BusinessException e) {
 			System.out.println("Lancio una BusinessException a UtenteService tryRegistrazioneUtente.");

@@ -64,7 +64,7 @@ public class MainController {
 	@PostMapping("/getFacolta")
 	public ResponseDTO trovaFacoltaConMaterie(@RequestBody FacoltaDTO facoltaDaTrovareConMaterie) {
 		try {
-			ResponseDTO dtoPerFrontend = facoltaMateriaService.findFacoltaConMaterieById(facoltaDaTrovareConMaterie);
+			ResponseDTO dtoPerFrontend = facoltaMateriaService.findFacoltaConMaterieById(facoltaDaTrovareConMaterie.getId());
 			return dtoPerFrontend;
 		} catch (BusinessException e) {
 			return new ResponseDTO("Errore! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
@@ -80,10 +80,13 @@ public class MainController {
 			return dtoPerFrontend;
 		} 
 //		catch (BusinessException e) {
-//			return new SuperDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+//			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 //		}	
 		catch (Exception e) {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
 	}
-}
+	
+
+	}
+

@@ -4,14 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Facolta_materiaEntity {
+@ToString
+public class FacoltaMateriaEntity {
 
-	private Integer facolta_id;
-	private Integer materia_id;
+	private Integer facoltaId;
+	private Integer materiaId;
 	
 }

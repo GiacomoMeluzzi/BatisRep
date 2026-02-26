@@ -2,6 +2,8 @@ package lepackage.dao;
 
 import org.springframework.stereotype.Component;
 
+import lepackage.dto.FacoltaUtenteDTO;
+import lepackage.dto.UtenteMateriaDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.mappers.MateriaEFacoltaMapper;
 import lepackage.models.FacoltaEntity;
@@ -35,6 +37,50 @@ public class MateriaEFacoltaDao implements MateriaEFacoltaMapper {
 			throw new Exception(e.getStackTrace()[0] + "");
 		} finally {
 			SqlMapFactory.instance().closeSession();
+		}
+	}
+
+	@Override
+	public Integer insertMateriaEUtente(UtenteMateriaDTO utenteConMaterie) throws Exception {
+		try {
+			utenteConMaterie.verificaNonNullitaCampi();
+			materiaMapper = (MateriaEFacoltaMapper) SqlMapFactory.instance().getMapper(MateriaEFacoltaMapper.class);
+			System.out.println("Aperta istanza SqlMapFactory, inizio query a findFacoltaConMaterieById.");
+			Integer righeDiUtenteConMaterieInserito = materiaMapper.insertMateriaEUtente(utenteConMaterie);
+			if (righeDiUtenteConMaterieInserito == null || righeDiUtenteConMaterieInserito == 0) {
+				System.out.println("Errore nel'inserimento dell'utente con materie in birdge table.");
+				throw new BusinessException("Errore nel'inserimento dell'utente con materie in birdge table.");
+			}
+			System.out.println("Utente con materie inserito nella brideg table, " + righeDiUtenteConMaterieInserito + " record inseriti.");
+			return righeDiUtenteConMaterieInserito;
+		} catch (BusinessException e) {
+			System.out.println("BusinessException a insertMateriaEUtente.");
+			throw e;
+		} catch (Exception e) {	
+			System.out.println("Exception a insertMateriaEUtente " +  e.getMessage());
+			throw new Exception(e.getStackTrace()[0] + "");
+		} 
+	}
+
+	@Override
+	public Integer insertFacoltaEUtente(FacoltaUtenteDTO facoltaConUtenti) throws Exception {
+		try {
+			facoltaConUtenti.verificaNonNullitaCampi();
+			materiaMapper = (MateriaEFacoltaMapper) SqlMapFactory.instance().getMapper(MateriaEFacoltaMapper.class);
+			System.out.println("Aperta istanza SqlMapFactory, inizio query a findFacoltaConMaterieById.");
+			Integer righeDiFacoltaConUtentiInserita = materiaMapper.insertFacoltaEUtente(facoltaConUtenti);
+			if (righeDiFacoltaConUtentiInserita == null || righeDiFacoltaConUtentiInserita == 0) {
+				System.out.println("Errore nel'inserimento della facoltà con utenti in birdge table.");
+				throw new BusinessException("Errore nel'inserimento della facoltà con utenti in birdge table.");
+			}
+			System.out.println("Facoltà con utenti inserita nella brideg table, " + righeDiFacoltaConUtentiInserita + " record inseriti.");
+			return righeDiFacoltaConUtentiInserita;
+		} catch (BusinessException e) {
+			System.out.println("BusinessException a insertFacoltaEUtente.");
+			throw e;
+		} catch (Exception e) {	
+			System.out.println("Exception a insertFacoltaEUtente " +  e.getMessage());
+			throw new Exception(e.getStackTrace()[0] + "");
 		}
 	}
 
