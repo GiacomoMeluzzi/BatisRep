@@ -14,12 +14,12 @@ import lepackage.utilities.ConvertitoreClass;
 import lepackage.utilities.UtilityClass;
 
 @Service
-public class MateriaEFacoltaService {
+public class MateriaFacoltaService {
 
 	private MateriaEFacoltaDao materiaFacoltaDao;
 	private UtilityClass<Integer> utilityClass;
 
-	public MateriaEFacoltaService(MateriaEFacoltaDao materiaEFacoltaDao, UtilityClass<Integer> utilityClass) {
+	public MateriaFacoltaService(MateriaEFacoltaDao materiaEFacoltaDao, UtilityClass<Integer> utilityClass) {
 		this.materiaFacoltaDao = materiaEFacoltaDao;
 		this.utilityClass = utilityClass;
 	}

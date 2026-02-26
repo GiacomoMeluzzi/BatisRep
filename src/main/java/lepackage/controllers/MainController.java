@@ -12,7 +12,7 @@ import lepackage.dto.ResponseDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.services.CommonService;
-import lepackage.services.MateriaEFacoltaService;
+import lepackage.services.MateriaFacoltaService;
 import lepackage.services.UtenteService;
 
 @RestController
@@ -20,10 +20,10 @@ import lepackage.services.UtenteService;
 public class MainController {
 
 	private UtenteService utenteService;
-	private MateriaEFacoltaService facoltaMateriaService;
+	private MateriaFacoltaService facoltaMateriaService;
 	private CommonService commonService;
 
-	public MainController(UtenteService utenteService, MateriaEFacoltaService facoltaMateriaService,
+	public MainController(UtenteService utenteService, MateriaFacoltaService facoltaMateriaService,
 			CommonService commonService) {
 		this.utenteService = utenteService;
 		this.facoltaMateriaService = facoltaMateriaService;

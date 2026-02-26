@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lepackage.mappers.VotoMapper">
+
+	<select id="selectVotoPerStudenteById" parameterType="Integer"
+	>select * from voti 
+		where studente_id = #{studenteId}
+	</select>
+	
+	<select id="selectVotoPerProfessoreEStudenteById" parameterType="VotoDTO"
+	>select s.username as studente_username, p.username as professore_usernane, v.valore as voto
+		from voti v
+		join utenti s on s.id = v.studente_id
+		join utenti p on p.id = v.professore_id
+		where s.id = #{studenteId}
+		and p.id = #{professoreId}
+	</select>
+	
+	<insert id="insertNuovoVoto">
+	</insert>
+	
+	<!-- mappe -->
+
+
+</mapper>
