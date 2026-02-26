@@ -26,7 +26,7 @@ public class ConvertitoreClass {
 			nuovoUtenteDTO.setEmail(utenteDaConvertireSenzaPassword.getEmail());
 			nuovoUtenteDTO.setPassword(null);
 			if(utenteDaConvertireSenzaPassword.getRuolo() != null) {
-				nuovoUtenteDTO.setRuolo(utenteDaConvertireSenzaPassword.getRuolo().getNome());
+				nuovoUtenteDTO.setRuolo(utenteDaConvertireSenzaPassword.getRuolo().getNome().toString());
 			}
 			System.out.println("Convertita entità in DTO.");
 			return nuovoUtenteDTO;
@@ -51,7 +51,7 @@ public class ConvertitoreClass {
 			nuovoUtenteDTO.setPassword(null);
 			nuovoUtenteDTO.setFacoltaId(utenteDaConvertireSenzaPassword.getFacolta_id());
 			if (null != utenteDaConvertireSenzaPassword.getRuolo()) {
-				nuovoUtenteDTO.setRuolo(utenteDaConvertireSenzaPassword.getRuolo().getNome());
+				nuovoUtenteDTO.setRuolo(utenteDaConvertireSenzaPassword.getRuolo().getNome().toString());
 			}
 			if (utenteDaConvertireSenzaPassword.getMaterie() != null
 					&& utenteDaConvertireSenzaPassword.getMaterie().size() != 0) {

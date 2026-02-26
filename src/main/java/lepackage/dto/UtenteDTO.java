@@ -19,12 +19,12 @@ public class UtenteDTO extends SuperDTO {
 	private String username;
 	private String email;
 	private String password;
-	private Ruolo ruolo;
+	private String ruolo;
 	private List<String> materie;
 	private List<Integer> materieId;
 	private Integer facoltaId;
 	
-	public UtenteDTO (String username, String email, Ruolo ruolo) {
+	public UtenteDTO (String username, String email, String ruolo) {
 		this.username = username;
 		this.email = email;
 		this.ruolo = ruolo;
