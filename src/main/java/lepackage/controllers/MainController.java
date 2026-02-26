@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lepackage.dto.FacoltaDTO;
-import lepackage.dto.MateriaDTO;
-import lepackage.dto.ResponseDTO;
-import lepackage.dto.UtenteDTO;
+import lepackage.models.dto.FacoltaDTO;
+import lepackage.models.dto.MateriaDTO;
+import lepackage.models.dto.ResponseDTO;
+import lepackage.models.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.services.CommonService;
 import lepackage.services.MateriaFacoltaService;

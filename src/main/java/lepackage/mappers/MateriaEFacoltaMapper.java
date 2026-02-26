@@ -1,7 +1,7 @@
 package lepackage.mappers;
 
-import lepackage.dto.FacoltaUtenteDTO;
-import lepackage.dto.UtenteMateriaDTO;
+import lepackage.models.dto.FacoltaUtenteDTO;
+import lepackage.models.dto.UtenteMateriaDTO;
 import lepackage.models.entities.FacoltaEntity;
 import lepackage.models.entities.MateriaEntity;
 

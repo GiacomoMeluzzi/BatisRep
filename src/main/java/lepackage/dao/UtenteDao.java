@@ -1,4 +1,4 @@
-package lepackage.models.dao;
+package lepackage.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,10 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import lepackage.dto.FacoltaUtenteDTO;
-import lepackage.dto.UtenteDTO;
-import lepackage.dto.UtenteMateriaDTO;
+import lepackage.models.dto.FacoltaUtenteDTO;
+import lepackage.models.dto.UtenteDTO;
+import lepackage.models.dto.UtenteMateriaDTO;
 import lepackage.exceptions.BusinessException;
-import lepackage.mappers.MateriaEFacoltaMapper;
 import lepackage.mappers.UtenteMapper;
 import lepackage.models.entities.UtenteEntity;
 import lepackage.utils.SqlMapFactory;

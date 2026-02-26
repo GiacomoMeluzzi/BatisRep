@@ -3,9 +3,9 @@ package lepackage.models.pojos.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import lepackage.dto.FacoltaDTO;
-import lepackage.dto.MateriaDTO;
-import lepackage.dto.UtenteDTO;
+import lepackage.models.dto.FacoltaDTO;
+import lepackage.models.dto.MateriaDTO;
+import lepackage.models.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.models.entities.FacoltaEntity;
 import lepackage.models.entities.MateriaEntity;

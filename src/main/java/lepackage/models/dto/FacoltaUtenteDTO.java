@@ -1,4 +1,4 @@
-package lepackage.dto;
+package lepackage.models.dto;
 
 import java.util.List;
 

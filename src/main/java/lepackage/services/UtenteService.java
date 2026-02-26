@@ -3,10 +3,10 @@ package lepackage.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import lepackage.dto.ResponseDTO;
-import lepackage.dto.UtenteDTO;
+import lepackage.models.dto.ResponseDTO;
+import lepackage.models.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
-import lepackage.models.dao.UtenteDao;
+import lepackage.dao.UtenteDao;
 import lepackage.models.entities.UtenteEntity;
 import lepackage.models.pojos.utilities.ConvertitoreClass;
 import lepackage.models.pojos.utilities.UtilityClass;

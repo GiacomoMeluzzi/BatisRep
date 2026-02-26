@@ -1,9 +1,9 @@
-package lepackage.models.dao;
+package lepackage.dao;
 
 import org.springframework.stereotype.Component;
 
-import lepackage.dto.FacoltaUtenteDTO;
-import lepackage.dto.UtenteMateriaDTO;
+import lepackage.models.dto.FacoltaUtenteDTO;
+import lepackage.models.dto.UtenteMateriaDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.mappers.MateriaEFacoltaMapper;
 import lepackage.models.entities.FacoltaEntity;

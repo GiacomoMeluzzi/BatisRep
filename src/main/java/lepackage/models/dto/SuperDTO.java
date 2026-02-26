@@ -1,4 +1,4 @@
-package lepackage.dto;
+package lepackage.models.dto;
 
 import lepackage.exceptions.BusinessException;
 
