@@ -1,21 +1,20 @@
 package lepackage.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import lepackage.exceptions.BusinessException;
-import lepackage.models.FacoltaEntity;
-import lepackage.models.MateriaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class FacoltaDTO extends SuperDTO implements Serializable{
 
 	private static final long serialVersionUID = 3051203338431526641L;
