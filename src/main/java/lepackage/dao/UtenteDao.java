@@ -1,5 +1,9 @@
 package lepackage.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -122,52 +126,65 @@ public class UtenteDao implements UtenteMapper {
 		}
 	}
 
-	public Integer registraNuovoUtente(UtenteDTO nuovoUtente, UtenteMateriaDTO nuovoUtenteMateriaDTO,
-			FacoltaUtenteDTO nuovaFacoltaUtenteDTO) throws Exception {
-		try {
-			System.out.println("Entro inserisciNuovoUtente in UtenteDao.");
-			SqlMapFactory.instance().openSession();
-			nuovoUtente.verificaNonNullitaCampi();
-			materiaEfacoltaDao = new MateriaEFacoltaDao();
-			System.out.println("Preparazione a inserimento nuovo utente ultimate.");
-			
-			utenteMapper = (UtenteMapper) SqlMapFactory.instance().getMapper(UtenteMapper.class);
-			System.out.println("Aperta istanza SqlMapFactory, inizio query necessarie a registerNuovoUtente.");
-			
-			materiaEfacoltaDao.insertMateriaEUtente(nuovoUtenteMateriaDTO);
-			System.out.println("Utente con materie inserite in bridge table.");
-			
-			materiaEfacoltaDao.insertFacoltaEUtente(nuovaFacoltaUtenteDTO);
-			System.out.println("Facoltà con utente inserita in bridge table, insert necessari completati.");
-			
-			Integer recordInseritoUtente = utenteMapper.inserisciNuovoUtente(nuovoUtente);
-			System.out.println("Utente inserito! " + recordInseritoUtente + " cambiamento apportato!");
-			return recordInseritoUtente;
-		} catch (Exception e) {
-			SqlMapFactory.instance().rollbackSession();
-			throw new Exception(e.getStackTrace()[0] + "");
-		} finally {
-			SqlMapFactory.instance().closeSession();
-		}
-	}
-
 	@Override
 	public Integer inserisciNuovoUtente(UtenteDTO nuovoUtente) throws Exception {
 		try {
-		utenteMapper = SqlMapFactory.instance().getMapper(UtenteMapper.class);
-		nuovoUtente.verificaNonNullitaCampi();
-		Integer recordInseritoUtente = utenteMapper.inserisciNuovoUtente(nuovoUtente);
-		if(recordInseritoUtente == null || recordInseritoUtente != 1) {
-			System.out.println("Errore nell'inserimento utente a inserisciNuovoUtente.");
-			throw new BusinessException("Errore nell'inserimento del nuovo utente.");
-		}
-		return recordInseritoUtente;
+			System.out.println("Entro in inserisciNuovoUtente.");
+			utenteMapper = SqlMapFactory.instance().getMapper(UtenteMapper.class);
+			nuovoUtente.verificaNonNullitaCampi();
+			Integer recordInseritoUtente = utenteMapper.inserisciNuovoUtente(nuovoUtente);
+			if (recordInseritoUtente == null || recordInseritoUtente != 1) {
+				System.out.println("Errore nell'inserimento utente a inserisciNuovoUtente.");
+				throw new BusinessException("Errore nell'inserimento del nuovo utente.");
+			}
+			return recordInseritoUtente;
 		} catch (BusinessException e) {
 			System.out.println("BusinessException a inserisciNuovoUtente.");
 			throw e;
 		} catch (Exception e) {
 			System.out.println("Eccezione a inserisciNuovoUtente " + e.getMessage());
 			throw e;
+		}
+	}
+
+	public Integer registraNuovoUtente(UtenteDTO nuovoUtente) throws Exception {
+		try {
+			System.out.println("Entro registraNuovoUtente in UtenteDao.");
+			SqlMapFactory.instance().openSession();
+			materiaEfacoltaDao = new MateriaEFacoltaDao();
+			System.out.println("Preparazione a inserimento nuovo utente ultimate.");
+
+			utenteMapper = SqlMapFactory.instance().getMapper(UtenteMapper.class);
+			Integer recordInseritoUtente = utenteMapper.inserisciNuovoUtente(nuovoUtente);
+			System.out.println("Utente inserito! " + recordInseritoUtente + " cambiamento apportato!");
+
+			System.out.println("Creo DTO per bridge tables.");
+			UtenteMateriaDTO nuovoUtenteMateriaDTO = new UtenteMateriaDTO(nuovoUtente.getId(),
+					nuovoUtente.getMaterieId());
+			List<Integer> idUtentiFacolta = new ArrayList<Integer>();
+			idUtentiFacolta.add(nuovoUtente.getId());
+			FacoltaUtenteDTO nuovaFacoltaUtenteDTO = new FacoltaUtenteDTO(nuovoUtente.getFacoltaId(), idUtentiFacolta);
+			System.out.println("Creazione DTO ultimata.");
+
+			materiaEfacoltaDao.insertMateriaEUtente(nuovoUtenteMateriaDTO);
+			System.out.println("Utente con materie inserite in bridge table.");
+
+			materiaEfacoltaDao.insertFacoltaEUtente(nuovaFacoltaUtenteDTO);
+			System.out.println("Facoltà con utente inserita in bridge table, insert necessari completati.");
+
+			SqlMapFactory.instance().commitSession();
+			return recordInseritoUtente;
+		} catch (PersistenceException e) {
+			System.out.println("L'utente è già esistente.");
+			throw new BusinessException("L'utente esiste già.");
+		} catch (BusinessException e) {
+			System.out.println("Eccezione a registraNuovoUtente.");
+			throw new BusinessException("registraNuovoUtente " + e.getMessage());
+		} catch (Exception e) {
+			SqlMapFactory.instance().rollbackSession();
+			throw new Exception(e.getStackTrace()[0] + "");
+		} finally {
+			SqlMapFactory.instance().closeSession();
 		}
 	}
 

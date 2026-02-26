@@ -11,19 +11,19 @@
 		where f.id = #{id}
 	</select>
 	
-	<insert id="insertMateriaEUtente" parameterType="UtenteMateria"
-	>insert into utente_materia utente_id, materia_id 
+	<insert id="insertMateriaEUtente" parameterType="UtenteMateria" 
+	>insert into utente_materia (utente_id, materia_id)
 	values 
 		<foreach collection="materiaId" item="id" separator=",">
-			(#{utente_id}, #{id})
+			(#{utenteId}, #{id})
 		</foreach>
 	</insert>
 	
 	<insert id="insertFacoltaEUtente" parameterType="FacoltaUtente"
-	>insert into facolta_utente facolta_id, utente_id 
+	>insert into facolta_utente (facolta_id, utente_id)
 	values 
 		<foreach collection="utenteId" item="id" separator=",">
-			(#{facolta_id}, #{id})
+			(#{facoltaId}, #{id})
 		</foreach>
 	</insert>
 	
@@ -36,5 +36,5 @@
 	        <result property="nome" column="materia_nome"/>
 	    </collection>
 	</resultMap>
-
+	
 </mapper>

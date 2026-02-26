@@ -15,13 +15,10 @@ import static lepackage.utilities.Constants.*;
 public class UtenteService {
 
 	private UtenteDao utenteDao;
-	private MateriaEFacoltaService materiaEfacoltaService;
 	private UtilityClass<UtenteDTO> utilityClass;
 
-	public UtenteService(UtenteDao utenteDao, MateriaEFacoltaService materiaEfacoltaService,
-			UtilityClass<UtenteDTO> utilityClass) {
+	public UtenteService(UtenteDao utenteDao, UtilityClass<UtenteDTO> utilityClass) {
 		this.utenteDao = utenteDao;
-		this.materiaEfacoltaService = materiaEfacoltaService;
 		this.utilityClass = utilityClass;
 	}
 
@@ -67,15 +64,15 @@ public class UtenteService {
 			throw e;
 		}
 	}
-	
-	public ResponseDTO findUtenteConMaterieDaUsername (UtenteDTO utenteDaCercare) throws Exception {
+
+	public ResponseDTO findUtenteConMaterieDaUsername(UtenteDTO utenteDaCercare) throws Exception {
 		try {
 			utilityClass.verificaOggettoNonNull(utenteDaCercare);
 			System.out.println("Entra findUtenteConMaterieDaUsername.");
 			utilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
 					utenteDaCercare.getUsername(), null, null, null, null, null, null);
 			UtenteEntity utenteTrovato = utenteDao.findUtenteConMaterieDaUsername(utenteDaCercare.getUsername());
-			if(utenteTrovato.getMaterie() == null || utenteTrovato.getMaterie().size() == 0) {
+			if (utenteTrovato.getMaterie() == null || utenteTrovato.getMaterie().size() == 0) {
 				throw new BusinessException(utenteTrovato.getUsername() + " non ha materie!");
 			}
 			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteDTOtoEntityNoPassword(utenteTrovato);
@@ -83,9 +80,8 @@ public class UtenteService {
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
 			System.out.println("Lancio una BusinessException a UtenteService findUtenteConMaterieDaUsername.");
-			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteConMaterieDaUsername." );
-		}
-		catch (Exception e) {
+			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteConMaterieDaUsername.");
+		} catch (Exception e) {
 			System.out.println("Lancio una Exception a UtenteService findUtenteConMaterieDaUsername.");
 			throw e;
 		}

@@ -73,7 +73,7 @@ public class MateriaEFacoltaDao implements MateriaEFacoltaMapper {
 				System.out.println("Errore nel'inserimento della facoltà con utenti in birdge table.");
 				throw new BusinessException("Errore nel'inserimento della facoltà con utenti in birdge table.");
 			}
-			System.out.println("Facoltà con utenti inserita nella brideg table, " + righeDiFacoltaConUtentiInserita + " record inseriti.");
+			System.out.println("Facoltà con utenti inserita nella bridge table, " + righeDiFacoltaConUtentiInserita + " record inseriti.");
 			return righeDiFacoltaConUtentiInserita;
 		} catch (BusinessException e) {
 			System.out.println("BusinessException a insertFacoltaEUtente.");

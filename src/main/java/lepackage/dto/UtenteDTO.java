@@ -1,11 +1,8 @@
 package lepackage.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lepackage.exceptions.BusinessException;
-import lepackage.models.MateriaEntity;
-import lepackage.models.UtenteEntity;
 import lepackage.varie.Ruolo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,11 +21,24 @@ public class UtenteDTO extends SuperDTO {
 	private String password;
 	private Ruolo ruolo;
 	private List<String> materie;
+	private List<Integer> materieId;
 	private Integer facoltaId;
+	
+	public UtenteDTO (String username, String email, Ruolo ruolo) {
+		this.username = username;
+		this.email = email;
+		this.ruolo = ruolo;
+	}
 
 	@Override
 	public void verificaNonNullitaCampi() throws BusinessException {
 		if (materie == null || materie.size() == 0) {
+			throw new BusinessException("Campo materie vuoto a verificaNonNullitaCampi a UtenteDTO.");
+		}
+	}
+
+	public void verificaNonNullitaCampiPerRegister() throws BusinessException {
+		if (materieId == null || materieId.size() == 0) {
 			throw new BusinessException("Campo materie vuoto a verificaNonNullitaCampi a UtenteDTO.");
 		}
 

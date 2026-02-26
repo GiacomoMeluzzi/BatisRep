@@ -67,6 +67,7 @@ public class SqlMapFactory {
 	}
 
 	public <T> T getMapper(Class<T> type) {
+		System.out.println("Mapper ottenuto.");
 		return ((SqlMapFactory) THREAD_LOCAL.get()).sqlSession.getMapper(type);
 	}
 

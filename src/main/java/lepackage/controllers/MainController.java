@@ -1,5 +1,6 @@
 package lepackage.controllers;
 
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import lepackage.dto.FacoltaDTO;
 import lepackage.dto.ResponseDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
+import lepackage.services.CommonService;
 import lepackage.services.MateriaEFacoltaService;
 import lepackage.services.UtenteService;
 
@@ -19,10 +21,13 @@ public class MainController {
 
 	private UtenteService utenteService;
 	private MateriaEFacoltaService facoltaMateriaService;
+	private CommonService commonService;
 
-	public MainController(UtenteService utenteService, MateriaEFacoltaService facoltaMateriaService) {
+	public MainController(UtenteService utenteService, MateriaEFacoltaService facoltaMateriaService,
+			CommonService commonService) {
 		this.utenteService = utenteService;
 		this.facoltaMateriaService = facoltaMateriaService;
+		this.commonService = commonService;
 	}
 
 	@PostMapping("/findByUsername")
@@ -76,12 +81,12 @@ public class MainController {
 	@PostMapping("/registraUtente")
 	public ResponseDTO registraNuovoUtente(@RequestBody UtenteDTO utenteDaRegistrare) {
 		try {
-			ResponseDTO dtoPerFrontend = null;
+			ResponseDTO dtoPerFrontend = commonService.tryRegistrazioneUtente(utenteDaRegistrare);
 			return dtoPerFrontend;
 		} 
-//		catch (BusinessException e) {
-//			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
-//		}	
+		catch (BusinessException e) {
+			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		}
 		catch (Exception e) {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
