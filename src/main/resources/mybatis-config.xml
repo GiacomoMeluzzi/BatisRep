@@ -6,15 +6,16 @@
 
 <typeAliases>
 	<!-- ENTITIES  -->
-	<typeAlias type="lepackage.models.UtenteEntity" alias="Utente"/>
-	<typeAlias type="lepackage.models.RuoloEntity" alias="Ruolo"/>
-	<typeAlias type="lepackage.models.MateriaEntity" alias="Materia"/>
-	<typeAlias type="lepackage.models.FacoltaEntity" alias="Facolta"/>
-	<typeAlias type="lepackage.models.VotoEntity" alias="Voto"/>
+	<typeAlias type="lepackage.models.entities.UtenteEntity" alias="Utente"/>
+	<typeAlias type="lepackage.models.entities.RuoloEntity" alias="Ruolo"/>
+	<typeAlias type="lepackage.models.entities.MateriaEntity" alias="Materia"/>
+	<typeAlias type="lepackage.models.entities.FacoltaEntity" alias="Facolta"/>
+	<typeAlias type="lepackage.models.entities.VotoEntity" alias="Voto"/>
 	<!-- DTOs -->
-	<typeAlias type="lepackage.dto.UtenteDTO" alias="UtenteDTO"/>
-	<typeAlias type="lepackage.dto.UtenteMateriaDTO" alias="UtenteMateria"/>
-	<typeAlias type="lepackage.dto.FacoltaUtenteDTO" alias="FacoltaUtente"/>
+	<typeAlias type="lepackage.models.dto.UtenteDTO" alias="UtenteDTO"/>
+	<typeAlias type="lepackage.models.dto.VotoDTO" alias="VotoDTO"/>
+	<typeAlias type="lepackage.models.dto.UtenteMateriaDTO" alias="UtenteMateria"/>
+	<typeAlias type="lepackage.models.dto.FacoltaUtenteDTO" alias="FacoltaUtente"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">

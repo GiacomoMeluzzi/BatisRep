@@ -101,13 +101,19 @@ public class UtilityClass<T> {
 			System.out.println("Stringa vuota a verificaOggettoNonNull.");
 			throw new BusinessException("Stringa vuota.");
 		}
-		if (oggettoDaControllare instanceof Object[] array && array.length == 0) {
+		if (oggettoDaControllare instanceof Object[]) {
+			Object[] arrayDaControllare = (Object[]) oggettoDaControllare;
+			if(arrayDaControllare.length == 0) {
 			System.out.println("Array vuoto a verificaOggettoNonNull.");
 			throw new BusinessException("Array vuoto.");
+			}
 		}
-		if (oggettoDaControllare instanceof java.util.List<?> list && list.isEmpty()) {
+		if (oggettoDaControllare instanceof java.util.List<?>) {
+			java.util.List<?> listaDaControllare = (java.util.List<?>) oggettoDaControllare;
+			if(listaDaControllare.size() == 0) {
 			System.out.println("Lista vuota a verificaOggettoNonNull.");
 			throw new BusinessException("Lista vuota.");
+			}
 		}
 		System.out.println("Verifica non nullità completata.");
 	}
