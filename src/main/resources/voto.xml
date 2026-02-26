@@ -8,8 +8,8 @@
 		where studente_id = #{studenteId}
 	</select>
 	
-	<select id="selectVotoPerProfessoreEStudenteById" parameterType="VotoDTO"
-	>select s.username as studente_username, p.username as professore_usernane, v.valore as voto
+	<select id="selectVotiPerProfessoreEStudenteById" parameterType="VotoDTO" resultMap="votiConUtenti"
+	>select s.username as studente_username, p.username as professore_username, v.valore as voto
 		from voti v
 		join utenti s on s.id = v.studente_id
 		join utenti p on p.id = v.professore_id
@@ -21,6 +21,14 @@
 	</insert>
 	
 	<!-- mappe -->
+	
+	<resultMap id="votiConUtenti" type="VotoDTO">
+	 <id property="studenteUsername" column="studente_username"/>
+		<result property="studenteUsername" column="studente_username"/>
+		<collection property="voti" javaType="ArrayList" ofType="Integer">
+			<result column="voto"/>
+		</collection>
+	</resultMap>
 
 
 </mapper>

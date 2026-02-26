@@ -12,21 +12,17 @@ import lepackage.models.dto.ResponseDTO;
 import lepackage.models.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.services.CommonService;
-import lepackage.services.MateriaFacoltaService;
 import lepackage.services.UtenteService;
 
 @RestController
 @RequestMapping("/user")
-public class MainController {
+public class UtenteController {
 
 	private UtenteService utenteService;
-	private MateriaFacoltaService facoltaMateriaService;
 	private CommonService commonService;
 
-	public MainController(UtenteService utenteService, MateriaFacoltaService facoltaMateriaService,
-			CommonService commonService) {
+	public UtenteController(UtenteService utenteService, CommonService commonService) {
 		this.utenteService = utenteService;
-		this.facoltaMateriaService = facoltaMateriaService;
 		this.commonService = commonService;
 	}
 
@@ -41,8 +37,8 @@ public class MainController {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@PostMapping("/tryLogin") 
+
+	@PostMapping("/tryLogin")
 	public ResponseDTO tryLogin(@RequestBody UtenteDTO utenteDaLoggare) {
 		try {
 			ResponseDTO dtoPerFrontend = utenteService.findUtenteByEmailEPassword(utenteDaLoggare);
@@ -53,7 +49,7 @@ public class MainController {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@PostMapping("/getMaterieUtente")
 	public ResponseDTO trovaMaterieUtente(@RequestBody UtenteDTO utenteDaTrovareConMaterie) {
 		try {
@@ -65,45 +61,17 @@ public class MainController {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@PostMapping("/getFacolta")
-	public ResponseDTO trovaFacoltaConMaterie(@RequestBody FacoltaDTO facoltaDaTrovareConMaterie) {
-		try {
-			ResponseDTO dtoPerFrontend = facoltaMateriaService.findFacoltaConMaterieById(facoltaDaTrovareConMaterie.getId());
-			return dtoPerFrontend;
-		} catch (BusinessException e) {
-			return new ResponseDTO("Errore! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
-		}
-	}
-	
+
 	@PostMapping("/registraUtente")
 	public ResponseDTO registraNuovoUtente(@RequestBody UtenteDTO utenteDaRegistrare) {
 		try {
 			ResponseDTO dtoPerFrontend = commonService.tryRegistrazioneUtente(utenteDaRegistrare);
 			return dtoPerFrontend;
-		} 
-		catch (BusinessException e) {
-			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
-		}
-		catch (Exception e) {
-			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
-		}
-	}
-	
-	@PostMapping("/trovaMateria")
-	public ResponseDTO trovaMateriaConUtenti(@RequestBody MateriaDTO materiaDaCercare) {
-		try {
-			ResponseDTO dtoPerFrontend = facoltaMateriaService.findMateriaConUtenti(materiaDaCercare);
-			return dtoPerFrontend;
 		} catch (BusinessException e) {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
-		} 
+		}
 	}
 
 }
-

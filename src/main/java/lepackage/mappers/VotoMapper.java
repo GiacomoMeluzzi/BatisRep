@@ -1,5 +1,10 @@
 package lepackage.mappers;
 
-public interface VotoMapper {
+import lepackage.models.dto.VotoDTO;
+import lepackage.models.entities.VotoEntity;
 
+public interface VotoMapper {
+	
+	public VotoEntity selectVotiPerProfessoreEStudenteById(VotoDTO dtoConUtentiDaCercare) throws Exception;
+	
 }
