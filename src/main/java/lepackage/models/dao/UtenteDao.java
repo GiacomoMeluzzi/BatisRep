@@ -1,4 +1,4 @@
-package lepackage.dao;
+package lepackage.models.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import lepackage.dto.UtenteMateriaDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.mappers.MateriaEFacoltaMapper;
 import lepackage.mappers.UtenteMapper;
-import lepackage.models.UtenteEntity;
+import lepackage.models.entities.UtenteEntity;
 import lepackage.utils.SqlMapFactory;
 
 @Component

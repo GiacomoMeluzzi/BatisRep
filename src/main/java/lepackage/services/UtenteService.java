@@ -2,14 +2,16 @@ package lepackage.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import lepackage.dao.UtenteDao;
+
 import lepackage.dto.ResponseDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
-import lepackage.models.UtenteEntity;
-import lepackage.utilities.ConvertitoreClass;
-import lepackage.utilities.UtilityClass;
-import static lepackage.utilities.Constants.*;
+import lepackage.models.dao.UtenteDao;
+import lepackage.models.entities.UtenteEntity;
+import lepackage.models.pojos.utilities.ConvertitoreClass;
+import lepackage.models.pojos.utilities.UtilityClass;
+
+import static lepackage.models.pojos.utilities.Constants.*;
 
 @Service
 public class UtenteService {

@@ -1,4 +1,4 @@
-package lepackage.utilities;
+package lepackage.models.pojos.utilities;
 
 public class Constants {
 	

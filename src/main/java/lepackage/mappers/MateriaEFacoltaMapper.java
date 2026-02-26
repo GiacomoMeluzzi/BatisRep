@@ -2,9 +2,8 @@ package lepackage.mappers;
 
 import lepackage.dto.FacoltaUtenteDTO;
 import lepackage.dto.UtenteMateriaDTO;
-import lepackage.models.FacoltaEntity;
-import lepackage.models.MateriaEntity;
-import lepackage.models.UtenteEntity;
+import lepackage.models.entities.FacoltaEntity;
+import lepackage.models.entities.MateriaEntity;
 
 public interface MateriaEFacoltaMapper {
 	

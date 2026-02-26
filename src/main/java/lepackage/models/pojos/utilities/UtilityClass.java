@@ -1,4 +1,4 @@
-package lepackage.utilities;
+package lepackage.models.pojos.utilities;
 
 import java.util.regex.Pattern;
 

@@ -1,4 +1,6 @@
-package lepackage.models;
+package lepackage.models.entities;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +13,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class FacoltaMateriaEntity {
+public class FacoltaEntity {
 
-	private Integer facoltaId;
-	private Integer materiaId;
-	
+	private Integer id;
+	private String nome;
+	private List<MateriaEntity> materie;
+
 }

@@ -1,5 +1,6 @@
-package lepackage.models;
+package lepackage.models.entities;
 
+import lepackage.varie.Ruolo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +12,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Utente_materiaEntity {
-
-	private Integer utente_id;
-	private Integer materia_id;
+public class RuoloEntity {
+	
+	private Ruolo nome;
 	
 }

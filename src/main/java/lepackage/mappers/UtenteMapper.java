@@ -1,7 +1,7 @@
 package lepackage.mappers;
 
 import lepackage.dto.UtenteDTO;
-import lepackage.models.UtenteEntity;
+import lepackage.models.entities.UtenteEntity;
 
 public interface UtenteMapper {
 

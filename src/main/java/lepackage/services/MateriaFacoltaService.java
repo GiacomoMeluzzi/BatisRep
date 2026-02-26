@@ -3,15 +3,16 @@ package lepackage.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import lepackage.dao.MateriaEFacoltaDao;
+
 import lepackage.dto.FacoltaDTO;
 import lepackage.dto.MateriaDTO;
 import lepackage.dto.ResponseDTO;
 import lepackage.exceptions.BusinessException;
-import lepackage.models.FacoltaEntity;
-import lepackage.models.MateriaEntity;
-import lepackage.utilities.ConvertitoreClass;
-import lepackage.utilities.UtilityClass;
+import lepackage.models.dao.MateriaEFacoltaDao;
+import lepackage.models.entities.FacoltaEntity;
+import lepackage.models.entities.MateriaEntity;
+import lepackage.models.pojos.utilities.ConvertitoreClass;
+import lepackage.models.pojos.utilities.UtilityClass;
 
 @Service
 public class MateriaFacoltaService {

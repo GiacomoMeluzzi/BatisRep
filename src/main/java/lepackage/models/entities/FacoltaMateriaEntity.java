@@ -1,4 +1,4 @@
-package lepackage.models;
+package lepackage.models.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class VotoEntity {
-	
-	private Integer id;
-	private Integer studente_id;
-	private Integer professore_id;
-	private Integer materia_id;
-	private Integer valore;
+public class FacoltaMateriaEntity {
+
+	private Integer facoltaId;
+	private Integer materiaId;
 	
 }

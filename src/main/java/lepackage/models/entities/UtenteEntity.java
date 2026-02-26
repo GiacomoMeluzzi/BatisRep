@@ -1,4 +1,4 @@
-package lepackage.models;
+package lepackage.models.entities;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,18 +1,18 @@
 package lepackage.services;
 
-import static lepackage.utilities.Constants.*;
+import static lepackage.models.pojos.utilities.Constants.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import lepackage.dao.MateriaEFacoltaDao;
-import lepackage.dao.UtenteDao;
 import lepackage.dto.ResponseDTO;
 import lepackage.dto.SuperDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
-import lepackage.models.FacoltaEntity;
-import lepackage.utilities.UtilityClass;
+import lepackage.models.dao.MateriaEFacoltaDao;
+import lepackage.models.dao.UtenteDao;
+import lepackage.models.entities.FacoltaEntity;
+import lepackage.models.pojos.utilities.UtilityClass;
 
 @Component
 public class CommonService {
