@@ -28,9 +28,12 @@ public class UtenteService {
 			System.out.println("Entra findUtenteyUsername.");
 			utilityClass.regexCheckUnoFinoAQuattroCampi(ONE_REGEX_ARGUMENT, LOGIN_REGEX_USR,
 					utenteDaCercare.getUsername(), null, null, null, null, null, null);
+			
 			UtenteEntity utenteTrovato = utenteDao.findUtenteByUsername(utenteDaCercare.getUsername());
-			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteDTOtoEntityNoPassword(utenteTrovato);
+			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteEntityToDtoNoFacoltaEMaterie(utenteTrovato);
+			
 			ResponseDTO oggettoPerFrontEnd = new ResponseDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
+			System.out.println("Ritorno oggetto a controller a findUtenteByUsername.");
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
 			System.out.println("Lancio una BusinessException a UtenteService UtenteService findUtenteByUsername.");
@@ -49,8 +52,10 @@ public class UtenteService {
 					utenteDaCercare.getEmail(), LOGIN_REGEX_PSW, utenteDaCercare.getPassword(), null, null, null, null);
 			UtenteEntity utenteTrovato = utenteDao.findUtenteByEmailEPasswordJoinRuolo(utenteDaCercare.getEmail(),
 					utenteDaCercare.getPassword());
-			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteDTOtoEntityNoPassword(utenteTrovato);
+			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteEntityToDtoNoFacoltaEMaterie(utenteTrovato);
+			
 			ResponseDTO oggettoPerFrontEnd = new ResponseDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
+			System.out.println("Ritorno oggetto a controller a findUtenteByEmailEPassword.");
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
 			if (e.getErrorObject() != null) {
@@ -75,7 +80,9 @@ public class UtenteService {
 			if (utenteTrovato.getMaterie() == null || utenteTrovato.getMaterie().size() == 0) {
 				throw new BusinessException(utenteTrovato.getUsername() + " non ha materie!");
 			}
-			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteDTOtoEntityNoPassword(utenteTrovato);
+			UtenteDTO utentePerFrontend = ConvertitoreClass.utenteEntityToDTO(utenteTrovato);
+			
+			System.out.println("Ritorno oggetto a controller a findUtenteConMaterieDaUsername.");
 			ResponseDTO oggettoPerFrontEnd = new ResponseDTO("Utente trovato!", utentePerFrontend, HttpStatus.OK);
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {

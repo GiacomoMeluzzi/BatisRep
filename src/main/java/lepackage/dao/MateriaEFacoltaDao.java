@@ -7,6 +7,7 @@ import lepackage.dto.UtenteMateriaDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.mappers.MateriaEFacoltaMapper;
 import lepackage.models.FacoltaEntity;
+import lepackage.models.MateriaEntity;
 import lepackage.utils.SqlMapFactory;
 
 @Component
@@ -29,10 +30,38 @@ public class MateriaEFacoltaDao implements MateriaEFacoltaMapper {
 			System.out.println("Facoltà trovata nel DB.");
 			return facoltaTrovata;
 		} catch (BusinessException e) {
+			System.out.println("BusinessException a findFacoltaConMaterieById " + e.getMessage());
 			SqlMapFactory.instance().rollbackSession();
 			throw e;
 		} catch (Exception e) {	
-			System.out.println(e.getMessage());
+			System.out.println("Exception a findFacoltaConMaterieById " + e.getMessage());
+			SqlMapFactory.instance().rollbackSession();
+			throw new Exception(e.getStackTrace()[0] + "");
+		} finally {
+			SqlMapFactory.instance().closeSession();
+		}
+	}
+	
+	@Override
+	public MateriaEntity findMateriaConUtentiById(Integer materiaId) throws Exception {
+		try {
+			SqlMapFactory.instance().openSession();
+			materiaMapper = (MateriaEFacoltaMapper) SqlMapFactory.instance().getMapper(MateriaEFacoltaMapper.class);
+			System.out.println("Aperta istanza SqlMapFactory, inizio query a findMateriaConUtentiById.");
+			MateriaEntity materiaTrovata = materiaMapper.findMateriaConUtentiById(materiaId);
+			if (null == materiaTrovata) {
+				System.out.println("Materia non trovata.");
+				throw new BusinessException("Materia non trovata.");
+			}
+			SqlMapFactory.instance().commitSession();
+			System.out.println("Materia trovata nel DB.");
+			return materiaTrovata;
+		} catch (BusinessException e) {
+			System.out.println("BusinessException a findMateriaConUtentiById " + e.getMessage());
+			SqlMapFactory.instance().rollbackSession();
+			throw e;
+		} catch (Exception e) {	
+			System.out.println("Exception a findMateriaConUtentiById " + e.getMessage());
 			SqlMapFactory.instance().rollbackSession();
 			throw new Exception(e.getStackTrace()[0] + "");
 		} finally {

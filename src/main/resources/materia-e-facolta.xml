@@ -11,6 +11,14 @@
 		where f.id = #{id}
 	</select>
 	
+	<select id="findMateriaConUtentiById" resultMap="materiaUtentiMap"
+	>select m.id, m.nome as materia_nome, u.username as username
+		from materie m
+		left join utente_materia t on t.materia_id = m.id
+		left join utenti u on t.utente_id = u.id
+		where m.id = #{id}
+	</select>
+	
 	<insert id="insertMateriaEUtente" parameterType="UtenteMateria" 
 	>insert into utente_materia (utente_id, materia_id)
 	values 
@@ -34,6 +42,14 @@
 	    <result property="nome" column="facolta_nome"/>
 	    <collection property="materie" ofType="Materia">
 	        <result property="nome" column="materia_nome"/>
+	    </collection>
+	</resultMap>
+	
+	<resultMap id="materiaUtentiMap" type="Materia">
+		<id property="id" column="id"/>
+	    <result property="nome" column="materia_nome"/>
+	    <collection property="utenti" ofType="Utente">
+	        <result property="username" column="username"/>
 	    </collection>
 	</resultMap>
 	

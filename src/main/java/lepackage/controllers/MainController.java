@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lepackage.dto.FacoltaDTO;
+import lepackage.dto.MateriaDTO;
 import lepackage.dto.ResponseDTO;
 import lepackage.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
@@ -92,6 +93,18 @@ public class MainController {
 		}
 	}
 	
-
+	@PostMapping("/trovaMateria")
+	public ResponseDTO trovaMateriaConUtenti(@RequestBody MateriaDTO materiaDaCercare) {
+		try {
+			ResponseDTO dtoPerFrontend = facoltaMateriaService.findMateriaConUtenti(materiaDaCercare);
+			return dtoPerFrontend;
+		} catch (BusinessException e) {
+			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		}
+		catch (Exception e) {
+			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
+		} 
 	}
+
+}
 
