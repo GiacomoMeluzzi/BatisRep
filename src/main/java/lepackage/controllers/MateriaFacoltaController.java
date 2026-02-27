@@ -10,7 +10,6 @@ import lepackage.exceptions.BusinessException;
 import lepackage.models.dto.FacoltaDTO;
 import lepackage.models.dto.MateriaDTO;
 import lepackage.models.dto.ResponseDTO;
-import lepackage.services.CommonService;
 import lepackage.services.MateriaFacoltaService;
 
 @RestController
@@ -33,8 +32,7 @@ public class MateriaFacoltaController {
 		} catch (Exception e) {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
-	}
-	
+	}	
 	
 	@PostMapping("/trovaMateria")
 	public ResponseDTO trovaMateriaConUtenti(@RequestBody MateriaDTO materiaDaCercare) {
