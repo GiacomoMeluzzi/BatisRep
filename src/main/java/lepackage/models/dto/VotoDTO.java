@@ -20,6 +20,8 @@ public class VotoDTO extends SuperDTO {
 	private String studenteId;
 	private String professoreId;
 	private Integer valore;
+	private String studenteUsername;
+	private String professoreUsername;
 	private List<Integer> voti;
 
 	@Override

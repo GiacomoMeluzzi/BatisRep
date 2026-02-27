@@ -10,7 +10,6 @@ import lepackage.exceptions.BusinessException;
 import lepackage.models.dto.FacoltaDTO;
 import lepackage.models.dto.MateriaDTO;
 import lepackage.models.dto.ResponseDTO;
-import lepackage.services.CommonService;
 import lepackage.services.MateriaFacoltaService;
 
 @RestController

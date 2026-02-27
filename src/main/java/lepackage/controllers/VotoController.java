@@ -2,6 +2,7 @@ package lepackage.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class VotoController {
 	}
 	
 	@PostMapping("/votiConUtenti")
-	public ResponseDTO trovaVotiConUtenti(VotoDTO votoDaCercare)  {
+	public ResponseDTO trovaVotiConUtenti(@RequestBody VotoDTO votoDaCercare)  {
 		try {
 			ResponseDTO oggettoPerFrontEnd = votoService.selectVotiPerProfessoreEStudenteById(votoDaCercare);
 			return oggettoPerFrontEnd;

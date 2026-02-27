@@ -2,13 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="lepackage.mappers.VotoMapper">
-
-	<select id="selectVotoPerStudenteById" parameterType="Integer"
-	>select * from voti 
-		where studente_id = #{studenteId}
-	</select>
 	
-	<select id="selectVotiPerProfessoreEStudenteById" parameterType="VotoDTO" resultMap="votiConUtenti"
+	<select id="selectVotiPerProfessoreEStudenteById" parameterType="Voto" resultMap="votiConUtenti"
 	>select s.username as studente_username, p.username as professore_username, v.valore as voto
 		from voti v
 		join utenti s on s.id = v.studente_id
@@ -22,9 +17,10 @@
 	
 	<!-- mappe -->
 	
-	<resultMap id="votiConUtenti" type="VotoDTO">
+	<resultMap id="votiConUtenti" type="Voto">
 	 <id property="studenteUsername" column="studente_username"/>
 		<result property="studenteUsername" column="studente_username"/>
+		<result property="professoreUsername" column="professore_username"/>
 		<collection property="voti" javaType="ArrayList" ofType="Integer">
 			<result column="voto"/>
 		</collection>

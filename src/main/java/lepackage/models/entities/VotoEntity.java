@@ -1,5 +1,7 @@
 package lepackage.models.entities;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +20,9 @@ public class VotoEntity {
 	private Integer professore_id;
 	private Integer materia_id;
 	private Integer valore;
+	private List<Integer> voti;
+	private String professoreUsername;
+	private String studenteUsername;
 	
 }
+ 
