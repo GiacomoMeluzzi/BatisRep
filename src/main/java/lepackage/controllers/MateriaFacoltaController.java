@@ -32,8 +32,7 @@ public class MateriaFacoltaController {
 		} catch (Exception e) {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		}
-	}
-	
+	}	
 	
 	@PostMapping("/trovaMateria")
 	public ResponseDTO trovaMateriaConUtenti(@RequestBody MateriaDTO materiaDaCercare) {

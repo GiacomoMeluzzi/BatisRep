@@ -5,6 +5,7 @@ import static lepackage.models.pojos.utilities.Constants.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import lepackage.models.dto.ErrorDTO;
 import lepackage.models.dto.ResponseDTO;
 import lepackage.models.dto.SuperDTO;
 import lepackage.models.dto.UtenteDTO;
@@ -55,7 +56,8 @@ public class CommonService {
 			if (facoltaTrovata.getMaterie() == null || facoltaTrovata.getMaterie().size() == 0) {
 				System.out.println("Nessuna materia trovata nella facoltà cercata.");
 				throw new BusinessException(
-						"Nessuna materia trovata nella facoltà cercata a MateriaEFacoltaService findFacoltaConMaterieById.");
+						"Nessuna materia trovata nella facoltà cercata a MateriaEFacoltaService findFacoltaConMaterieById.", 
+						new ErrorDTO(HttpStatus.PARTIAL_CONTENT));
 			}
 			utenteDao.registraNuovoUtente(utenteDaRegistrare);
 			UtenteDTO nuovoUtentePerFrontEnd = new UtenteDTO(utenteDaRegistrare.getUsername(), utenteDaRegistrare.getEmail(), utenteDaRegistrare.getRuolo());

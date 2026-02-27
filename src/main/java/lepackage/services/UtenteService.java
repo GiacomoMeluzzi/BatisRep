@@ -39,6 +39,9 @@ public class UtenteService {
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
 			System.out.println("Lancio una BusinessException a UtenteService UtenteService findUtenteByUsername.");
+			if(e.getErrorObject() != null) {
+				throw e;
+			}
 			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteByUsername.");
 		} catch (Exception e) {
 			System.out.println("Lancio una Exception a UtenteService UtenteService findUtenteByUsername.");
@@ -65,7 +68,7 @@ public class UtenteService {
 				throw e;
 			}
 			System.out.println("Lancio una BusinessException a UtenteService findUtenteByEmailEPasswordJoinRuolo.");
-			throw new BusinessException(e.getMessage(), " a UtenteService findUtenteByEmailEPasswordJoinRuolo.");
+			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteByEmailEPasswordJoinRuolo.");
 		} catch (Exception e) {
 			System.out.println("Lancio una Exception a UtenteService findUtenteByEmailEPasswordJoinRuolo.");
 			throw e;
