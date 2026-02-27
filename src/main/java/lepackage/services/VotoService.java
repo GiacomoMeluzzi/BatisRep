@@ -9,9 +9,10 @@ import lepackage.models.dto.ResponseDTO;
 import lepackage.models.dto.VotoDTO;
 import lepackage.models.entities.VotoEntity;
 import lepackage.models.pojos.utilities.UtilityClass;
+import lepackage.services.interfaces.VotoServiceInterface;
 
 @Service
-public class VotoService {
+public class VotoService implements VotoServiceInterface {
 	
 	VotoDao votoDao;
 	UtilityClass<VotoDTO> utilityClass;

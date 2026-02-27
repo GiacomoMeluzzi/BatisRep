@@ -31,8 +31,9 @@
   <mappers>
   
     <mapper resource="utente.xml"/> 
-    <mapper resource="materia-e-facolta.xml"/>
-     <mapper resource="voto.xml"/> 
+    <mapper resource="materia.xml"/>
+    <mapper resource="facolta.xml"/>
+    <mapper resource="voto.xml"/> 
     
   </mappers>
 </configuration>

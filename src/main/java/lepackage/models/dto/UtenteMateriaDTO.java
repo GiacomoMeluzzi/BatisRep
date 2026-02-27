@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UtenteMateriaDTO extends SuperDTO {
-	
+	//sempre avere id
 	private Integer utenteId;
 	private List<Integer> materiaId;
 	

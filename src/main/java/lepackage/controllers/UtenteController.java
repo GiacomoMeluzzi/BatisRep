@@ -11,15 +11,17 @@ import lepackage.models.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
 import lepackage.services.CommonService;
 import lepackage.services.UtenteService;
+import lepackage.services.interfaces.CommonServiceInterface;
+import lepackage.services.interfaces.UtenteServiceInterface;
 
 @RestController
 @RequestMapping("/user")
 public class UtenteController {
+	//lista di stringhe errori
+	private UtenteServiceInterface utenteService;
+	private CommonServiceInterface commonService;
 
-	private UtenteService utenteService;
-	private CommonService commonService;
-
-	public UtenteController(UtenteService utenteService, CommonService commonService) {
+	public UtenteController(UtenteServiceInterface utenteService, CommonServiceInterface commonService) {
 		this.utenteService = utenteService;
 		this.commonService = commonService;
 	}
@@ -63,6 +65,7 @@ public class UtenteController {
 	@PostMapping("/registraUtente")
 	public ResponseDTO registraNuovoUtente(@RequestBody UtenteDTO utenteDaRegistrare) {
 		try {
+			//setta oggetto di ritorno
 			ResponseDTO dtoPerFrontend = commonService.tryRegistrazioneUtente(utenteDaRegistrare);
 			return dtoPerFrontend;
 		} catch (BusinessException e) {

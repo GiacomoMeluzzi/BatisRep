@@ -11,7 +11,7 @@ import lepackage.models.entities.FacoltaEntity;
 import lepackage.models.entities.MateriaEntity;
 import lepackage.models.entities.UtenteEntity;
 
-public class ConvertitoreClass {
+public class Convertitore {
 
 	public static UtenteDTO utenteEntityToDtoNoFacoltaEMaterie(UtenteEntity utenteDaConvertireSenzaPassword) throws Exception {
 		try {

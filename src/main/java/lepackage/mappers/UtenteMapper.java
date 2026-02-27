@@ -13,5 +13,5 @@ public interface UtenteMapper {
 	
 	UtenteEntity findUtenteConMaterieDaUsername(String username) throws Exception;
 	
-	Integer inserisciNuovoUtente(UtenteDTO nuovoUtente) throws Exception;
+	int inserisciNuovoUtente(UtenteDTO nuovoUtente) throws Exception;
 }

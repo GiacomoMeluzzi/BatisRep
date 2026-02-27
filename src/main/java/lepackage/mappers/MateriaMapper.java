@@ -5,14 +5,10 @@ import lepackage.models.dto.UtenteMateriaDTO;
 import lepackage.models.entities.FacoltaEntity;
 import lepackage.models.entities.MateriaEntity;
 
-public interface MateriaEFacoltaMapper {
-	
-	FacoltaEntity findFacoltaConMaterieById(Integer facoltaId) throws Exception;
-	
+public interface MateriaMapper {
+		
 	MateriaEntity findMateriaConUtentiById(Integer materiaId) throws Exception;
-	
+	//mettere entities
 	Integer insertMateriaEUtente(UtenteMateriaDTO utenteConMaterie) throws Exception;
-	
-	Integer insertFacoltaEUtente(FacoltaUtenteDTO facoltaConUtenti) throws Exception;
-	
+		
 }
