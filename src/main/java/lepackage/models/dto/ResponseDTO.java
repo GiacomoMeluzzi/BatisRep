@@ -22,4 +22,8 @@ public class ResponseDTO implements Serializable {
 	private Object dtoForFrontEnd;
 	private HttpStatus statusCode;
 
+	public ResponseDTO(Object dtoForFrontEnd) {
+		this.dtoForFrontEnd = dtoForFrontEnd;
+	}
+	
 }

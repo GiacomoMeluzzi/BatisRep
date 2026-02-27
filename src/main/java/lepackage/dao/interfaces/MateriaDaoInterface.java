@@ -1,12 +1,12 @@
 package lepackage.dao.interfaces;
 
-import lepackage.models.dto.UtenteMateriaDTO;
 import lepackage.models.entities.MateriaEntity;
+import lepackage.models.entities.UtenteEntity;
 
 public interface MateriaDaoInterface {
 
-	public MateriaEntity findMateriaConUtentiById(Integer materiaId) throws Exception;
+	MateriaEntity findMateriaConUtentiById(Integer materiaId) throws Exception;
 	
-	public Integer insertMateriaEUtente(UtenteMateriaDTO utenteConMaterie) throws Exception;
+	int insertMateriaEUtente(UtenteEntity utenteConMaterie) throws Exception;
 	
 }

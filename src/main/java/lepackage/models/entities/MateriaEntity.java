@@ -18,5 +18,6 @@ public class MateriaEntity {
 	private Integer id;
 	private String nome;
 	private List<UtenteEntity> utenti;
+	private List<Integer> utentiId;
 	
 }

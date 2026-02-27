@@ -21,6 +21,8 @@ public class FacoltaDTO extends SuperDTO implements Serializable{
 	private Integer id;
 	private String nome;
 	private List<String> materie;
+	private List<Integer> utentiId;
+	private List<Integer> materieId;
 
 	@Override
 	public void verificaNonNullitaCampi() throws BusinessException {

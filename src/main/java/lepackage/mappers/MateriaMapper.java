@@ -1,14 +1,12 @@
 package lepackage.mappers;
 
-import lepackage.models.dto.FacoltaUtenteDTO;
-import lepackage.models.dto.UtenteMateriaDTO;
-import lepackage.models.entities.FacoltaEntity;
 import lepackage.models.entities.MateriaEntity;
+import lepackage.models.entities.UtenteEntity;
 
 public interface MateriaMapper {
 		
 	MateriaEntity findMateriaConUtentiById(Integer materiaId) throws Exception;
-	//mettere entities
-	Integer insertMateriaEUtente(UtenteMateriaDTO utenteConMaterie) throws Exception;
+
+	Integer insertMateriaEUtente(UtenteEntity utenteConMaterie) throws Exception;
 		
 }

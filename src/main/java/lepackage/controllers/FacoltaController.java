@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lepackage.exceptions.BusinessException;
 import lepackage.models.dto.FacoltaDTO;
-import lepackage.models.dto.MateriaDTO;
 import lepackage.models.dto.ResponseDTO;
-import lepackage.services.FacoltaService;
 import lepackage.services.interfaces.FacoltaServiceInterface;
 
 @RestController

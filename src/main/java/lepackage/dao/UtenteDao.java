@@ -106,7 +106,7 @@ public class UtenteDao implements UtenteDaoInterface {
 	}
 
 	@Override
-	public int inserisciNuovoUtente(UtenteDTO nuovoUtente) throws Exception {
+	public int inserisciNuovoUtente(UtenteEntity nuovoUtente) throws Exception {
 		try {
 			System.out.println("Entro in inserisciNuovoUtente.");
 			UtenteMapper utenteMapper = SqlMapFactory.instance().getMapper(UtenteMapper.class);

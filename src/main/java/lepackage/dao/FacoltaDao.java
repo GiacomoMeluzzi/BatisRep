@@ -17,7 +17,7 @@ public class FacoltaDao implements FacoltaDaoInterface {
 	public FacoltaEntity findFacoltaConMaterieById(Integer facoltaId) throws Exception {
 		try {
 			SqlMapFactory.instance().openSession();
-			FacoltaMapper facoltaMapper = (FacoltaMapper) SqlMapFactory.instance().getMapper(MateriaMapper.class);
+			FacoltaMapper facoltaMapper = (FacoltaMapper) SqlMapFactory.instance().getMapper(FacoltaMapper.class);
 			System.out.println("Aperta istanza SqlMapFactory, inizio query a findFacoltaConMaterieById.");
 			FacoltaEntity facoltaTrovata = facoltaMapper.findFacoltaConMaterieById(facoltaId);
 			if (null == facoltaTrovata) {
@@ -41,12 +41,12 @@ public class FacoltaDao implements FacoltaDaoInterface {
 	}	
 
 	@Override
-	public Integer insertFacoltaEUtente(FacoltaUtenteDTO facoltaConUtenti) throws Exception {
+	public int insertFacoltaEUtente(FacoltaEntity facoltaConUtenti) throws Exception {
 		try {
-			facoltaConUtenti.verificaNonNullitaCampi();
-			FacoltaMapper facoltaMapper = (FacoltaMapper) SqlMapFactory.instance().getMapper(MateriaMapper.class);
+			FacoltaMapper facoltaMapper = (FacoltaMapper) SqlMapFactory.instance().getMapper(FacoltaMapper.class);
 			System.out.println("Aperta istanza SqlMapFactory, inizio query a findFacoltaConMaterieById.");
 			Integer righeDiFacoltaConUtentiInserita = facoltaMapper.insertFacoltaEUtente(facoltaConUtenti);
+			
 			if (righeDiFacoltaConUtentiInserita == null || righeDiFacoltaConUtentiInserita == 0) {
 				System.out.println("Errore nel'inserimento della facoltà con utenti in birdge table.");
 				throw new BusinessException("Errore nel'inserimento della facoltà con utenti in birdge table.");

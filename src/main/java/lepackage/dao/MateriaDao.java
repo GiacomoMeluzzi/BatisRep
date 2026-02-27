@@ -9,6 +9,7 @@ import lepackage.exceptions.BusinessException;
 import lepackage.mappers.MateriaMapper;
 import lepackage.models.entities.FacoltaEntity;
 import lepackage.models.entities.MateriaEntity;
+import lepackage.models.entities.UtenteEntity;
 import lepackage.utils.SqlMapFactory;
 
 @Component
@@ -42,7 +43,7 @@ public class MateriaDao implements MateriaDaoInterface {
 	}
 
 	@Override
-	public Integer insertMateriaEUtente(UtenteMateriaDTO utenteConMaterie) throws Exception {
+	public int insertMateriaEUtente(UtenteEntity utenteConMaterie) throws Exception {
 		try {
 			MateriaMapper materiaMapper = (MateriaMapper) SqlMapFactory.instance().getMapper(MateriaMapper.class);
 			System.out.println("Aperta istanza SqlMapFactory, inizio query a findFacoltaConMaterieById.");

@@ -23,6 +23,7 @@ public class UtenteEntity {
 	private RuoloEntity ruolo;
 	private Integer facolta_id;
 	private List<MateriaEntity> materie;
+	private List<Integer> materieId;
 	
 	@Override
 	public int hashCode() {

@@ -1,6 +1,5 @@
 package lepackage.dao.interfaces;
 
-import lepackage.models.dto.UtenteDTO;
 import lepackage.models.entities.UtenteEntity;
 
 public interface UtenteDaoInterface {
@@ -13,6 +12,6 @@ public interface UtenteDaoInterface {
 	
 	UtenteEntity findUtenteConMaterieDaUsername(String usernameInEntrata) throws Exception;
 	
-	int inserisciNuovoUtente(UtenteDTO nuovoUtente) throws Exception;
+	int inserisciNuovoUtente(UtenteEntity nuovoUtente) throws Exception;
 	
 }

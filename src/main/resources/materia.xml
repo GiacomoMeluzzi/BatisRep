@@ -11,12 +11,12 @@
 		where m.id = #{id}
 	</select>
 	
-	<insert id="insertMateriaEUtente" parameterType="UtenteMateria" 
-	>insert into utente_materia (utente_id, materia_id)
-	values 
-		<foreach collection="materiaId" item="id" separator=",">
-			(#{utenteId}, #{id})
-		</foreach>
+	<insert id="insertMateriaEUtente" parameterType="Utente">
+	    insert into utente_materia (utente_id, materia_id)
+	    values
+	    <foreach collection="materieId" item="materiaId" separator=",">
+	        (#{id}, #{materiaId})
+	    </foreach>
 	</insert>
 	
 	<!-- mappe -->

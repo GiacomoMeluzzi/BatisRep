@@ -20,6 +20,7 @@ public class MateriaDTO extends SuperDTO implements Serializable {
 	private static final long serialVersionUID = 3051203338431526641L;
 	private Integer id;
 	private String nome;
+	private List<Integer> utentiId;
 	private List<String> utenti;
 	
 	@Override

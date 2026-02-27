@@ -32,7 +32,7 @@
 	<insert id="inserisciNuovoUtente" parameterType="UtenteDTO"
 		useGeneratedKeys="true" keyProperty="id"
 		>insert into utenti (username, email, password, ruolo)
-		values (#{username}, #{email}, #{password}, #{ruolo})
+		values (#{username}, #{email}, #{password}, #{ruolo.nome})
 	</insert>
 	
 	<!-- mappe -->

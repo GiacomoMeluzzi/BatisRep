@@ -1,6 +1,5 @@
 package lepackage.mappers;
 
-import lepackage.models.dto.UtenteDTO;
 import lepackage.models.entities.UtenteEntity;
 
 public interface UtenteMapper {
@@ -13,5 +12,5 @@ public interface UtenteMapper {
 	
 	UtenteEntity findUtenteConMaterieDaUsername(String username) throws Exception;
 	
-	int inserisciNuovoUtente(UtenteDTO nuovoUtente) throws Exception;
+	int inserisciNuovoUtente(UtenteEntity nuovoUtente) throws Exception;
 }

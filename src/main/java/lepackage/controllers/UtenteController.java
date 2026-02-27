@@ -9,15 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import lepackage.models.dto.ResponseDTO;
 import lepackage.models.dto.UtenteDTO;
 import lepackage.exceptions.BusinessException;
-import lepackage.services.CommonService;
-import lepackage.services.UtenteService;
 import lepackage.services.interfaces.CommonServiceInterface;
 import lepackage.services.interfaces.UtenteServiceInterface;
 
 @RestController
 @RequestMapping("/user")
 public class UtenteController {
-	//lista di stringhe errori
+
 	private UtenteServiceInterface utenteService;
 	private CommonServiceInterface commonService;
 
@@ -53,8 +51,8 @@ public class UtenteController {
 	@PostMapping("/getMaterieUtente")
 	public ResponseDTO trovaMaterieUtente(@RequestBody UtenteDTO utenteDaTrovareConMaterie) {
 		try {
-			ResponseDTO dtoPerFrontend = utenteService.findUtenteConMaterieDaUsername(utenteDaTrovareConMaterie);
-			return dtoPerFrontend;
+			ResponseDTO responseDaService = utenteService.findUtenteConMaterieDaUsername(utenteDaTrovareConMaterie);
+			return new ResponseDTO("Utente registrato!", responseDaService.getDtoForFrontEnd(), HttpStatus.OK);
 		} catch (BusinessException e) {
 			return new ResponseDTO("Errore! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
@@ -65,9 +63,8 @@ public class UtenteController {
 	@PostMapping("/registraUtente")
 	public ResponseDTO registraNuovoUtente(@RequestBody UtenteDTO utenteDaRegistrare) {
 		try {
-			//setta oggetto di ritorno
 			ResponseDTO dtoPerFrontend = commonService.tryRegistrazioneUtente(utenteDaRegistrare);
-			return dtoPerFrontend;
+			return new ResponseDTO("Utente registrato!", dtoPerFrontend.getDtoForFrontEnd(), HttpStatus.OK);
 		} catch (BusinessException e) {
 			return new ResponseDTO("Errore generico! " + e.getMessage(), null, HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
