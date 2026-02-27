@@ -38,10 +38,11 @@ public class UtenteService {
 			System.out.println("Ritorno oggetto a controller a findUtenteByUsername.");
 			return oggettoPerFrontEnd;
 		} catch (BusinessException e) {
-			System.out.println("Lancio una BusinessException a UtenteService UtenteService findUtenteByUsername.");
-			if(e.getErrorObject() != null) {
+			if (e.getErrorObject() != null) {
+				System.out.println("L'utente non è stato trovato.");
 				throw e;
 			}
+			System.out.println("Lancio una BusinessException a UtenteService UtenteService findUtenteByUsername.");
 			throw new BusinessException(e.getMessage() + " a UtenteService findUtenteByUsername.");
 		} catch (Exception e) {
 			System.out.println("Lancio una Exception a UtenteService UtenteService findUtenteByUsername.");

@@ -7,7 +7,6 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import lepackage.models.dto.ErrorDTO;
 import lepackage.models.dto.FacoltaUtenteDTO;
 import lepackage.models.dto.UtenteDTO;
 import lepackage.models.dto.UtenteMateriaDTO;
@@ -31,7 +30,7 @@ public class UtenteDao implements UtenteMapper {
 			UtenteEntity utenteTrovato = utenteMapper.findUtenteByUsername(usernameInEntrata);
 			if (null == utenteTrovato) {
 				System.out.println("Utente non trovato");
-				throw new BusinessException("Utente non trovato.", new ErrorDTO(HttpStatus.FORBIDDEN));
+				throw new BusinessException("Utente non trovato.", HttpStatus.NO_CONTENT);
 			}
 			SqlMapFactory.instance().commitSession();
 			System.out.println("Utente trovato nel DB.");
@@ -57,7 +56,7 @@ public class UtenteDao implements UtenteMapper {
 			UtenteEntity utenteTrovato = utenteMapper.findUtenteByEmailEPassword(emailInEntrata, passwordInEntrata);
 			if (null == utenteTrovato) {
 				System.out.println("Utente non trovato");
-				throw new BusinessException("Utente non trovato.", new ErrorDTO(HttpStatus.FORBIDDEN));
+				throw new BusinessException("Utente non trovato.", HttpStatus.NO_CONTENT);
 			}
 			SqlMapFactory.instance().commitSession();
 			System.out.println("Utente trovato nel DB.");
@@ -84,7 +83,7 @@ public class UtenteDao implements UtenteMapper {
 					passwordInEntrata);
 			if (null == utenteTrovato) {
 				System.out.println("Utente non trovato");
-				throw new BusinessException("Utente non trovato.", new ErrorDTO(HttpStatus.FORBIDDEN));
+				throw new BusinessException("Utente non trovato.");
 			}
 			SqlMapFactory.instance().commitSession();
 			System.out.println("Utente trovato nel DB.");
@@ -109,7 +108,7 @@ public class UtenteDao implements UtenteMapper {
 			UtenteEntity utenteTrovato = utenteMapper.findUtenteConMaterieDaUsername(usernameInEntrata);
 			if (null == utenteTrovato) {
 				System.out.println("Utente non trovato");
-				throw new BusinessException("Utente non trovato.", new ErrorDTO(HttpStatus.FORBIDDEN));
+				throw new BusinessException("Utente non trovato.");
 			}
 			SqlMapFactory.instance().commitSession();
 			System.out.println("Utente trovato nel DB.");
@@ -176,9 +175,11 @@ public class UtenteDao implements UtenteMapper {
 			return recordInseritoUtente;
 		} catch (PersistenceException e) {
 			System.out.println("L'utente è già esistente.");
+			SqlMapFactory.instance().rollbackSession();
 			throw new BusinessException("L'utente esiste già.");
 		} catch (BusinessException e) {
 			System.out.println("Eccezione a registraNuovoUtente.");
+			SqlMapFactory.instance().rollbackSession();
 			throw new BusinessException("registraNuovoUtente " + e.getMessage());
 		} catch (Exception e) {
 			SqlMapFactory.instance().rollbackSession();

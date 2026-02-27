@@ -1,6 +1,6 @@
 package lepackage.exceptions;
 
-import lepackage.models.dto.ErrorDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +13,13 @@ import lombok.Setter;
 public class BusinessException extends Exception {
 	
 	private static final long serialVersionUID = 988687614953802930L;
-	private ErrorDTO errorObject;
+	private Object errorObject;
 	
 	public BusinessException(String message) {
 		super(message);
 	}
 	
-	public BusinessException(String message, ErrorDTO errorObject) {
+	public BusinessException(String message, Object errorObject) {
 		super(message);
 		this.errorObject = errorObject;
 	}
